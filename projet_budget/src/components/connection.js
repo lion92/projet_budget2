@@ -26,6 +26,7 @@ const Connection = () => {
         await response.json().then(data => {
 
             if (!isNaN(data?.id)) {
+                localStorage.setItem("utilisateur", data?.id);
                 setMessageLog("Code Bon");
                 setProbleme('connecte')
             }

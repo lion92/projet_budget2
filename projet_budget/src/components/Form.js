@@ -5,6 +5,7 @@ import Navigation from "./Navigation";
 export default function Form(props) {
     let [valueInput, setValue] = useState("");
     let [valueInputTitre, setTitre] = useState("");
+    let [valueInputDescription, setDescription] = useState("");
     let [idVal, setId] = useState(-1);
     let [textp, setText] = useState([
         {titre: "bonjour1", text: "hehe"},
@@ -41,11 +42,10 @@ export default function Form(props) {
     ////////////////////////////////////////////
     ///////////////////fectchApi/////////////////////////
     const fetchAPI = useCallback(async () => {
-        const response = await fetch("https://memo.krissclotilde.com/tout/tache");
-        const resbis = await response.json();
-        console.log(resbis.message);
-        setText(resbis.message);
-        console.log("aa");
+        const response = await fetch("http://localhost:3004/todos");
+        const resbis = await response;
+        await console.log(resbis);
+       await setText(resbis);
         return resbis;
     }, [setText]);
 
@@ -71,7 +71,7 @@ export default function Form(props) {
     ///////////////////////////appel delete
     let fetchdelete = useCallback(async (data) => {
         const response = await fetch(
-            "https://memo.krissclotilde.com/delete/tache",
+            "http://localhost:3004/todos",
             {
                 method: "POST",
                 body: JSON.stringify({
@@ -83,49 +83,53 @@ export default function Form(props) {
             }
         );
 
-        const resbis = await response.json();
-        console.log(idVal);
-        console.log(resbis);
-        fetchAPI();
+        const resbis = await response;
+        await console.log(resbis);
+        await fetchAPI();
     });
     //////////////////////insert tache
     let fetchCreer = useCallback(async (e) => {
+        let id=parseInt(localStorage.getItem("utilisateur"));
         e.preventDefault();
         const response = await fetch(
-            "https://memo.krissclotilde.com/insert/tache",
+            "http://localhost:3004/todos",
             {
                 method: "POST",
                 body: JSON.stringify({
-                    msg: valueInput,
+                    title:valueInputTitre,
+                    description: valueInputDescription,
+                    user:id
                 }),
                 headers: {
                     "Content-Type": "application/json",
                 },
             }
         );
-        const resbis = await response.json();
-        fetchAPI();
+        const resbis = await response;
+        await fetchAPI();
+        await console.log(resbis);
     });
     ////////////////////update////////////
     let fetchAPIupdate = useCallback(async () => {
+        let userid=""+localStorage.getItem("utilisateur");
+        let id=parseInt(userid);
         const response = await fetch(
-            "https://memo.krissclotilde.com/update/tache",
+            "http://localhost:3004/todos"+idVal,
             {
                 method: "POST",
                 body: JSON.stringify({
-                    msg: valueInput,
-                    id: idVal,
+                    title:valueInputTitre,
+                    description: valueInputDescription,
+                    user:id
                 }),
                 headers: {
                     "Content-Type": "application/json",
                 },
             }
         );
-        const resbis = await response.json();
-        fetchAPI();
-        console.log(valueInput);
-        console.log(idVal);
-        console.log(JSON.stringify(resbis));
+        const resbis = await response;
+        await fetchAPI();
+        await console.log(resbis);
     });
     ////////////////////////input change value
     let Valuechange = (e) => {
