@@ -133,6 +133,14 @@ export default function Form(props) {
 
         return a;
     };
+    ////////////////////////input change description
+    let  valueChangeDescription= (e) => {
+        let a = e.target.value;
+        console.log(a);
+        setDescription(a)
+
+        return a;
+    };
     /////////////////////////modifier
     let modifier = (e) => {
         e.preventDefault();
@@ -153,6 +161,7 @@ export default function Form(props) {
                         <div className="container">
 
                             <input value={valueInput} onChange={(e) => Valuechange(e)}/>{" "}
+                            <input value={valueInputDescription} onChange={(e) =>valueChangeDescription(e)}/>{" "}
                             <button onClick={modifier}>modifier</button>
                             <button onClick={fetchCreer}>creer</button>
                             <button onClick={recherche}>Rechercher</button>
@@ -165,8 +174,8 @@ export default function Form(props) {
                                     del={del}
                                     changetext={textebis}
                                     updatefunc={idchange}
-                                    titre={item.title}
-                                    text={item.description}
+                                    title={item.title}
+                                    description={item.description}
                                     id={item.id}
                                 ></Item>
                             );

@@ -8,9 +8,9 @@ export default function Item(props) {
       <div onClick={()=>{props.updatefunc(props.id)
       props.changetext(props.text)
       }}className="card">
-        <h1>{props.titre}</h1>
+        <h1>{props.title}</h1>
         
-        <p>{props.text}</p>
+        <p>{props.description}</p>
         <button onClick={(e)=>props.del(e, props.id)}>delete</button>
       </div>
     </>
