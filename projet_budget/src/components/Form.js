@@ -63,6 +63,10 @@ export default function Form(props) {
     let textebis = (data) => {
         setValue(data);
     };
+    ///////////////////////////////////////////////////////////remonter le texte
+    let textebisDesc = (data) => {
+        setDescription(data);
+    };
     /////////////////////////////
     ///////////////////////////appel delete
     let fetchdelete = useCallback(async (data) => {
@@ -109,13 +113,13 @@ export default function Form(props) {
         await console.log(userid);
         let id=parseInt(userid);
         const response = await fetch(
-            "http://localhost:3004/todos"+idVal,
+            "http://localhost:3004/todos/"+idVal,
             {
-                method: "POST",
+                method: "PUT",
                 body: JSON.stringify({
                     title:valueInput,
                     description: valueInputDescription,
-                    user:userid
+                    user:id
                 }),
                 headers: {
                     "Content-Type": "application/json",
@@ -159,8 +163,9 @@ export default function Form(props) {
                         <label id="idLabel">
                             id:{idVal} </label>
                         <div className="container">
-
+                            <label>Titre</label>
                             <input value={valueInput} onChange={(e) => Valuechange(e)}/>{" "}
+                            <label>Description</label>
                             <input value={valueInputDescription} onChange={(e) =>valueChangeDescription(e)}/>{" "}
                             <button onClick={modifier}>modifier</button>
                             <button onClick={fetchCreer}>creer</button>
@@ -172,6 +177,7 @@ export default function Form(props) {
                             return (
                                 <Item
                                     del={del}
+                                    changeDec={textebisDesc}
                                     changetext={textebis}
                                     updatefunc={idchange}
                                     title={item.title}
