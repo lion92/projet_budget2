@@ -8,9 +8,6 @@ export default function Form(props) {
     let [valueInputDescription, setDescription] = useState("");
     let [idVal, setId] = useState(-1);
     let [textp, setText] = useState([
-        {titre: "bonjour1", text: "hehe"},
-        {titre: "bonjour2", text: "hehe"},
-        {titre: "bonjour3", text: "hehe"},
     ]);
     ///////////////////////////
     const [load, setLoad] = useState(false);
@@ -34,7 +31,7 @@ export default function Form(props) {
         } else {
             let f = await fetchAPI();
             console.log(f);
-            let tab = f.message.filter((elemt) => elemt.text.includes(valueInput));
+            let tab = f.filter((elemt) => elemt.text.includes(valueInput));
             setText(tab);
             console.log("bb");
         }
@@ -43,9 +40,8 @@ export default function Form(props) {
     ///////////////////fectchApi/////////////////////////
     const fetchAPI = useCallback(async () => {
         const response = await fetch("http://localhost:3004/todos");
-        const resbis = await response;
-        await console.log(resbis);
-       await setText(resbis);
+        const resbis = await response.json();
+        await setText(resbis);
         return resbis;
     }, [setText]);
 
@@ -70,13 +66,11 @@ export default function Form(props) {
     /////////////////////////////
     ///////////////////////////appel delete
     let fetchdelete = useCallback(async (data) => {
+       let idTodo =parseInt(data, 10)
         const response = await fetch(
-            "http://localhost:3004/todos",
+            "http://localhost:3004/todos/"+idTodo,
             {
-                method: "POST",
-                body: JSON.stringify({
-                    id: parseInt(data, 10),
-                }),
+                method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -84,21 +78,21 @@ export default function Form(props) {
         );
 
         const resbis = await response;
-        await console.log(resbis);
         await fetchAPI();
     });
     //////////////////////insert tache
     let fetchCreer = useCallback(async (e) => {
-        let id=parseInt(localStorage.getItem("utilisateur"));
+        let userid=""+localStorage.getItem("utilisateur");
+        let userid2=parseInt(userid)
         e.preventDefault();
         const response = await fetch(
             "http://localhost:3004/todos",
             {
                 method: "POST",
                 body: JSON.stringify({
-                    title:valueInputTitre,
+                    title:valueInput,
                     description: valueInputDescription,
-                    user:id
+                    user:userid2
                 }),
                 headers: {
                     "Content-Type": "application/json",
@@ -107,20 +101,21 @@ export default function Form(props) {
         );
         const resbis = await response;
         await fetchAPI();
-        await console.log(resbis);
+
     });
     ////////////////////update////////////
     let fetchAPIupdate = useCallback(async () => {
         let userid=""+localStorage.getItem("utilisateur");
+        await console.log(userid);
         let id=parseInt(userid);
         const response = await fetch(
             "http://localhost:3004/todos"+idVal,
             {
                 method: "POST",
                 body: JSON.stringify({
-                    title:valueInputTitre,
+                    title:valueInput,
                     description: valueInputDescription,
-                    user:id
+                    user:userid
                 }),
                 headers: {
                     "Content-Type": "application/json",
@@ -129,7 +124,6 @@ export default function Form(props) {
         );
         const resbis = await response;
         await fetchAPI();
-        await console.log(resbis);
     });
     ////////////////////////input change value
     let Valuechange = (e) => {
@@ -171,8 +165,8 @@ export default function Form(props) {
                                     del={del}
                                     changetext={textebis}
                                     updatefunc={idchange}
-                                    titre={item.titre}
-                                    text={item.text}
+                                    titre={item.title}
+                                    text={item.description}
                                     id={item.id}
                                 ></Item>
                             );
