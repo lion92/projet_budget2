@@ -7,8 +7,7 @@ export default function Form(props) {
     let [valueInputTitre, setTitre] = useState("");
     let [valueInputDescription, setDescription] = useState("");
     let [idVal, setId] = useState(-1);
-    let [textp, setText] = useState([
-    ]);
+    let [textp, setText] = useState([]);
     ///////////////////////////
     const [load, setLoad] = useState(false);
 
@@ -25,15 +24,19 @@ export default function Form(props) {
     ////////////////////////Rechercher/////////////
     let recherche = async (e) => {
         e.preventDefault();
-
         if (valueInput === "") {
-            fetchAPI();
+            console.log("test0");
+            await fetchAPI();
         } else {
             let f = await fetchAPI();
-            console.log(f);
-            let tab = f.filter((elemt) => elemt.text.includes(valueInput));
-            setText(tab);
-            console.log("bb");
+            await console.log(f);
+            await valueInput;
+            let tab = await f.filter((elemt) =>
+                elemt.title === valueInput
+                || elemt.description === valueInputDescription
+            );
+            await setText(tab);
+            await console.log("bb");
         }
     };
     ////////////////////////////////////////////
@@ -70,9 +73,9 @@ export default function Form(props) {
     /////////////////////////////
     ///////////////////////////appel delete
     let fetchdelete = useCallback(async (data) => {
-       let idTodo =parseInt(data, 10)
+        let idTodo = parseInt(data, 10)
         const response = await fetch(
-            "http://localhost:3004/todos/"+idTodo,
+            "http://localhost:3004/todos/" + idTodo,
             {
                 method: "DELETE",
                 headers: {
@@ -86,17 +89,17 @@ export default function Form(props) {
     });
     //////////////////////insert tache
     let fetchCreer = useCallback(async (e) => {
-        let userid=""+localStorage.getItem("utilisateur");
-        let userid2=parseInt(userid)
+        let userid = "" + localStorage.getItem("utilisateur");
+        let userid2 = parseInt(userid)
         e.preventDefault();
         const response = await fetch(
             "http://localhost:3004/todos",
             {
                 method: "POST",
                 body: JSON.stringify({
-                    title:valueInput,
+                    title: valueInput,
                     description: valueInputDescription,
-                    user:userid2
+                    user: userid2
                 }),
                 headers: {
                     "Content-Type": "application/json",
@@ -109,17 +112,17 @@ export default function Form(props) {
     });
     ////////////////////update////////////
     let fetchAPIupdate = useCallback(async () => {
-        let userid=""+localStorage.getItem("utilisateur");
+        let userid = "" + localStorage.getItem("utilisateur");
         await console.log(userid);
-        let id=parseInt(userid);
+        let id = parseInt(userid);
         const response = await fetch(
-            "http://localhost:3004/todos/"+idVal,
+            "http://localhost:3004/todos/" + idVal,
             {
                 method: "PUT",
                 body: JSON.stringify({
-                    title:valueInput,
+                    title: valueInput,
                     description: valueInputDescription,
-                    user:id
+                    user: id
                 }),
                 headers: {
                     "Content-Type": "application/json",
@@ -138,7 +141,7 @@ export default function Form(props) {
         return a;
     };
     ////////////////////////input change description
-    let  valueChangeDescription= (e) => {
+    let valueChangeDescription = (e) => {
         let a = e.target.value;
         console.log(a);
         setDescription(a)
@@ -166,7 +169,7 @@ export default function Form(props) {
                             <label>Titre</label>
                             <input value={valueInput} onChange={(e) => Valuechange(e)}/>{" "}
                             <label>Description</label>
-                            <input value={valueInputDescription} onChange={(e) =>valueChangeDescription(e)}/>{" "}
+                            <textarea value={valueInputDescription} onChange={(e) => valueChangeDescription(e)}/>{" "}
                             <button onClick={modifier}>modifier</button>
                             <button onClick={fetchCreer}>creer</button>
                             <button onClick={recherche}>Rechercher</button>

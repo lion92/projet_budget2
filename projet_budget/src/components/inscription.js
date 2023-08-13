@@ -48,7 +48,6 @@ const Inscription = () => {
     onChange={e => setPassword(e.target.value)} type={'text'}/>
 
     <button onClick={fetchInscription} id='btnSignup'>SIGNUP</button>
-        <a href='/login' >LOGIN</a>
         </div>
         </div>
 );

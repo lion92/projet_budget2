@@ -55,9 +55,6 @@ const Connection = () => {
                         <a id="mdpOublie" href="">Mot de passe ounblié</a>
                         <button onClick={fetchConnection} id='btnLogin'>LOGIN</button>
                         <h1>{(probleme!=='connecte'?'incorrect':'connecte')}</h1>
-                        <a href='/inscription'>
-                            SIGNUP
-                        </a>
                     </div>
 
                     </>
