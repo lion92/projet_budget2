@@ -4,6 +4,8 @@ import Navigation from "./Navigation";
 
 export default function Form(props) {
     let [valueInput, setValue] = useState("");
+    let [messageErrorDescription, setmessageErrorDescription] = useState("");
+    let [messageErrorTitre, setMessageerrorTitre] = useState("");
     let [valueInputTitre, setTitre] = useState("");
     let [valueInputDescription, setDescription] = useState("");
     let [idVal, setId] = useState(-1);
@@ -136,7 +138,13 @@ export default function Form(props) {
     let Valuechange = (e) => {
         let a = e.target.value;
         console.log(a);
-        setValue(a);
+
+        if(valueInput.length>20){
+            setMessageerrorTitre("La valeur du titre ne doit pas dépasser 20 caracteres")
+        }else{
+            setMessageerrorTitre("");
+            setValue(a);
+        }
 
         return a;
     };
@@ -144,8 +152,13 @@ export default function Form(props) {
     let valueChangeDescription = (e) => {
         let a = e.target.value;
         console.log(a);
-        setDescription(a)
 
+        if(valueInputDescription.length>50){
+            setmessageErrorDescription("La valeur du titre ne doit pas dépasser 50 caracteres")
+        }else{
+            setmessageErrorDescription("");
+            setDescription(a)
+        }
         return a;
     };
     /////////////////////////modifier
@@ -166,10 +179,16 @@ export default function Form(props) {
                         <label id="idLabel">
                             id:{idVal} </label>
                         <div className="container">
+                            <div>
                             <label>Titre</label>
                             <input value={valueInput} onChange={(e) => Valuechange(e)}/>{" "}
+                            <p className="error">{messageErrorTitre}</p>
+                            </div>
+                            <div>
                             <label>Description</label>
                             <textarea value={valueInputDescription} onChange={(e) => valueChangeDescription(e)}/>{" "}
+                                <p className="error">{messageErrorDescription}</p>
+                            </div>
                             <button onClick={modifier}>modifier</button>
                             <button onClick={fetchCreer}>creer</button>
                             <button onClick={recherche}>Rechercher</button>
