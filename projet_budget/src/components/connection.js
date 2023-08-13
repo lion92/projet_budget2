@@ -21,8 +21,8 @@ const Connection = () => {
     let fetchConnection = useCallback(async (e) => {
         e.preventDefault();
         let response =null;
-        if (password.length < 8) {
-            setPasswordError("impossible mot de passe trop court minimum 8 caractere")
+        if (password.length < 3) {
+            setPasswordError("impossible mot de passe trop court minimum 3 caractere")
         } else {
              response=await fetch(
                 "http://localhost:3004/connection/login",
@@ -39,7 +39,7 @@ const Connection = () => {
                 })
         }
 
-        await response.json().then(data => {
+        await response?.json().then(data => {
 
             if (!isNaN(data?.id)) {
                 localStorage.setItem("utilisateur", data?.id);
@@ -73,9 +73,9 @@ const Connection = () => {
                         <p className="error">{mailError}</p>
                         <input id='password' value={password} placeholder={'password'}
                                onChange={e => {
-                                   if (e.target.value.length < 8) {
+                                   if (e.target.value.length < 3) {
                                        setPassword(e.target.value);
-                                       setPasswordError("Le mot de passe doit être d'au moins 8 caractère")
+                                       setPasswordError("Le mot de passe doit être d'au moins 3 caractère")
                                    } else {
                                        setPasswordError("")
                                        setPassword(e.target.value)

@@ -139,13 +139,14 @@ export default function Form(props) {
         let a = e.target.value;
         console.log(a);
 
-        if(valueInput.length>20){
-            setMessageerrorTitre("La valeur du titre ne doit pas dépasser 20 caracteres")
-        }else{
-            setMessageerrorTitre("");
-            setValue(a);
-        }
+        if (valueInput.length > 20) {
 
+            setMessageerrorTitre("La valeur du titre ne doit pas dépasser 20 caracteres")
+        } else {
+            setMessageerrorTitre("");
+
+        }
+        setValue(a);
         return a;
     };
     ////////////////////////input change description
@@ -153,12 +154,13 @@ export default function Form(props) {
         let a = e.target.value;
         console.log(a);
 
-        if(valueInputDescription.length>50){
+        if (valueInputDescription.length > 50) {
             setmessageErrorDescription("La valeur du titre ne doit pas dépasser 50 caracteres")
-        }else{
+        } else {
             setmessageErrorDescription("");
-            setDescription(a)
+
         }
+        setDescription(a)
         return a;
     };
     /////////////////////////modifier
@@ -180,13 +182,13 @@ export default function Form(props) {
                             id:{idVal} </label>
                         <div className="container">
                             <div>
-                            <label>Titre</label>
-                            <input value={valueInput} onChange={(e) => Valuechange(e)}/>{" "}
-                            <p className="error">{messageErrorTitre}</p>
+                                <label>Titre</label>
+                                <input value={valueInput} onChange={(e) => Valuechange(e)}/>{" "}
+                                <p className="error">{messageErrorTitre}</p>
                             </div>
                             <div>
-                            <label>Description</label>
-                            <textarea value={valueInputDescription} onChange={(e) => valueChangeDescription(e)}/>{" "}
+                                <label>Description</label>
+                                <textarea value={valueInputDescription} onChange={(e) => valueChangeDescription(e)}/>{" "}
                                 <p className="error">{messageErrorDescription}</p>
                             </div>
                             <button onClick={modifier}>modifier</button>
