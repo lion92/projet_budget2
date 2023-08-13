@@ -197,7 +197,6 @@ export default function Form(props) {
                             <button onClick={recherche}>Rechercher</button>
                         </div>
                     </form>
-                <Budget></Budget>
                     <div className="container2">
                         {textp.map((item, index) => {
                             return (
@@ -213,6 +212,8 @@ export default function Form(props) {
                             );
                         })}
                     </div>
+                    <Budget></Budget>
+
                 </div>
                 : <h1>Chargement...</h1>}
 

@@ -14,6 +14,7 @@ export function Budget(props) {
         let [valueInputDescription, setDescription] = useState("");
         let [idVal, setId] = useState(-1);
         let [textp, setText] = useState([]);
+        let [montantTotal, setMontantTotal] = useState(0);
         const [load, setLoad] = useState(false);
 
         let attendre = () => {
@@ -50,6 +51,9 @@ export function Budget(props) {
             const response = await fetch("http://localhost:3004/action");
             const resbis = await response.json();
             await setText(resbis);
+            setMontantTotal(resbis.map(val => val.montant).reduce(function (a, b) {
+                return a + b;
+            }, 0))
             return resbis;
         }, [setText]);
 
@@ -101,9 +105,10 @@ export function Budget(props) {
                 {
                     method: "POST",
                     body: JSON.stringify({
+                        montant: montant,
                         categorie: actionCategorie,
                         description: actionDescription,
-                        user: parseInt( "" + localStorage.getItem("utilisateur"))
+                        user: parseInt("" + localStorage.getItem("utilisateur"))
                     }),
                     headers: {
                         "Content-Type": "application/json",
@@ -124,7 +129,7 @@ export function Budget(props) {
                         categorie: actionCategorie,
                         description: actionDescription,
                         montant: montant,
-                        user: parseInt( "" + localStorage.getItem("utilisateur"))
+                        user: parseInt("" + localStorage.getItem("utilisateur"))
                     }),
                     headers: {
                         "Content-Type": "application/json",
@@ -193,7 +198,8 @@ export function Budget(props) {
                         </div>
                         <div>
                             <label>Description</label>
-                            <input value={actionDescription} onChange={(e) => setActionDescription(e.target.value)}/>{" "}
+                            <input value={actionDescription}
+                                   onChange={(e) => setActionDescription(e.target.value)}/>{" "}
                             <p className="error">{actionDescriptionError}</p>
                         </div>
                         <div>
@@ -208,17 +214,42 @@ export function Budget(props) {
                     <button onClick={recherche}>Rechercher</button>
 
                 </form>
-                <div className="container2">
-                    {textp.map((item, index) => {
-                        return (
-                            <>
-                                <p>{item.id}</p>
-                                <p className="montant">{item.montant}</p>
-                                <p className="description">{item.description}</p>
-                            </>
-                        );
-                    })}
+                <div className="container">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Montant</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {textp.map((item, index) => {
+                            return (
+                                <>
+                                    <tr onClick={() => {
+                                        setIdMontant(item.id);
+                                        setMontant(item.montant);
+                                        setActionDescription(item.description);
+                                    }}>
+                                        <th>{item.id}</th>
+                                        <th className="montant">{item.montant}</th>
+                                        <th className="description">{item.description}</th>
+                                    </tr>
+                                </>
+                            );
+                        })}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th scope="row" colSpan="2"></th>
+                            <td colSpan="2">montantTotal{montantTotal}</td>
+                        </tr>
+                        </tfoot>
+                    </table>
                 </div>
+
             </div>
         );
     }

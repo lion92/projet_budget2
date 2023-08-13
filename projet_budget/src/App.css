@@ -32,6 +32,13 @@ body {
 
 
 }
+.montantDiv {
+  display: flex;
+  background: #42a6ba;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
 .container2 {
   display: flex;

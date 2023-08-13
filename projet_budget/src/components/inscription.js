@@ -3,6 +3,7 @@ import Navigation from "./Navigation";
 
 const Inscription = () => {
     const [email, setEmail] = useState("");
+    const [inscriptionError, setInscriptionError] = useState("");
     const [password, setPassword] = useState("");
     const [nom, setNom] = useState("");
     const [prenom, setPrenom] = useState("");
@@ -37,9 +38,11 @@ const Inscription = () => {
             setAgeError("Age doit être un nombre")
             return
         }
-        return validateEmail(email)
+        if(!validateEmail(email)){
+            return
+        }
 
-        if (passwordError.length < 3) {
+        if (passwordError.length > 3) {
             setPasswordError("Le password doit comporter au moins 3 caracteres")
             return
         }
@@ -61,6 +64,12 @@ const Inscription = () => {
                 },
             }
         );
+        if(response.ok){
+            setInscriptionError("Inscription ok")
+        }else
+        {
+            setPasswordError("une erreur s'est produite");
+        }
     });
 
     return (
@@ -129,6 +138,7 @@ const Inscription = () => {
                            }} type={'text'}/>
                     <p className="error">{passwordError}</p>
                 </div>
+                <p className="error">{inscriptionError}</p>
                 <button onClick={fetchInscription} id='btnSignup'>SIGNUP</button>
             </div>
         </div>
