@@ -15,9 +15,6 @@ const Navigation = () => {
                 <NavLink to={"/inscription"}>
                     <li>Incription</li>
                 </NavLink>
-                <NavLink to={"/budget"}>
-                    <li>Budget</li>
-                </NavLink>
 
 
             </ul>

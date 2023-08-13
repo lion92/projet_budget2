@@ -1,6 +1,7 @@
 import {useCallback, useEffect, useState} from "react";
 import Item from "./Item";
 import Navigation from "./Navigation";
+import Budget from "./Budget";
 
 export default function Form(props) {
     let [valueInput, setValue] = useState("");
@@ -196,6 +197,7 @@ export default function Form(props) {
                             <button onClick={recherche}>Rechercher</button>
                         </div>
                     </form>
+                <Budget></Budget>
                     <div className="container2">
                         {textp.map((item, index) => {
                             return (

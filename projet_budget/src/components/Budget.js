@@ -4,6 +4,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 export function Budget(props) {
     {
         let [actionDescription, setActionDescription] = useState("");
+        let [idMontant, setIdMontant] = useState(-1);
         let [montant, setMontant] = useState(0);
         let [montantError, setMontantError] = useState(0);
         let [actionCategorieError, setActionCategorieError] = useState("");
@@ -79,7 +80,7 @@ export function Budget(props) {
         let fetchdelete = useCallback(async (data) => {
             let idTodo = parseInt(data, 10)
             const response = await fetch(
-                "http://localhost:3004/todos/" + idTodo,
+                "http://localhost:3004/action/" + idTodo,
                 {
                     method: "DELETE",
                     headers: {
@@ -93,17 +94,16 @@ export function Budget(props) {
         });
         //////////////////////insert tache
         let fetchCreer = useCallback(async (e) => {
-            let userid = "" + localStorage.getItem("utilisateur");
-            let userid2 = parseInt(userid)
+
             e.preventDefault();
             const response = await fetch(
-                "http://localhost:3004/todos",
+                "http://localhost:3004/action",
                 {
                     method: "POST",
                     body: JSON.stringify({
-                        title: valueInput,
-                        description: valueInputDescription,
-                        user: userid2
+                        categorie: actionCategorie,
+                        description: actionDescription,
+                        user: parseInt( "" + localStorage.getItem("utilisateur"))
                     }),
                     headers: {
                         "Content-Type": "application/json",
@@ -116,17 +116,15 @@ export function Budget(props) {
         });
         ////////////////////update////////////
         let fetchAPIupdate = useCallback(async () => {
-            let userid = "" + localStorage.getItem("utilisateur");
-            await console.log(userid);
-            let id = parseInt(userid);
             const response = await fetch(
-                "http://localhost:3004/todos/" + idVal,
+                "http://localhost:3004/action/" + idMontant,
                 {
                     method: "PUT",
                     body: JSON.stringify({
-                        title: valueInput,
-                        description: valueInputDescription,
-                        user: id
+                        categorie: actionCategorie,
+                        description: actionDescription,
+                        montant: montant,
+                        user: parseInt( "" + localStorage.getItem("utilisateur"))
                     }),
                     headers: {
                         "Content-Type": "application/json",
@@ -173,7 +171,7 @@ export function Budget(props) {
         /////////////////////////modifier
         let deleteMontant = (e) => {
             e.preventDefault();
-            fetchdelete(idVal);
+            fetchdelete(idMontant);
             setValue("");
 
         };
@@ -182,21 +180,25 @@ export function Budget(props) {
             <div>
                 <form>
                     <label id="idLabel">
-                        id:{idVal} </label>
+                        id:{idMontant} </label>
                     <div className="container">
                         <div>
+                            <label>IdMontant</label>
+                            <input value={idMontant} onChange={(e) => setIdMontant(e.target.value)}/>{" "}
+                        </div>
+                        <div>
                             <label>Categorie</label>
-                            <input value={actionCategorie} onChange={(e) => setActionCategorie(e)}/>{" "}
+                            <input value={actionCategorie} onChange={(e) => setActionCategorie(e.target.value)}/>{" "}
                             <p className="error">{actionCategorieError}</p>
                         </div>
                         <div>
                             <label>Description</label>
-                            <input value={actionDescription} onChange={(e) => setActionDescription(e)}/>{" "}
+                            <input value={actionDescription} onChange={(e) => setActionDescription(e.target.value)}/>{" "}
                             <p className="error">{actionDescriptionError}</p>
                         </div>
                         <div>
                             <label>Montant</label>
-                            <input value={montant} onChange={(e) => setMontant(e)}/>{" "}
+                            <input value={montant} onChange={(e) => setMontant(e.target.value)}/>{" "}
                             <p className="error">{montantError}</p>
                         </div>
                     </div>
@@ -210,8 +212,9 @@ export function Budget(props) {
                     {textp.map((item, index) => {
                         return (
                             <>
-                            <p className="montant">{item.montant}</p>
-                            <p className="description">{item.description}</p>
+                                <p>{item.id}</p>
+                                <p className="montant">{item.montant}</p>
+                                <p className="description">{item.description}</p>
                             </>
                         );
                     })}
