@@ -12,7 +12,12 @@
   font-size: 15px;
   color: #9e0c0c;
 }
-
+.montant{
+  font-size: 25px;
+  color: #9e0c0c;
+  font-weight: bold;
+  background-color: #54b6a6;
+}
 body {
   background-color: #5ec8d0;
   margin: 10em;
@@ -31,7 +36,6 @@ body {
 .container2 {
   display: flex;
 
-  background: black;
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;

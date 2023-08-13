@@ -12,9 +12,11 @@ const Navigation = () => {
                 <NavLink to={"/login"}>
                     <li>Login</li>
                 </NavLink>
-
                 <NavLink to={"/inscription"}>
                     <li>Incription</li>
+                </NavLink>
+                <NavLink to={"/budget"}>
+                    <li>Budget</li>
                 </NavLink>
 
 
