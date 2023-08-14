@@ -1,8 +1,9 @@
-import {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import Item from "./Item";
 import Navigation from "./Navigation";
 import Budget from "./Budget";
 import Graph from "./Graph";
+import {Categorie} from "./Categorie";
 
 export default function Form(props) {
     let [valueInput, setValue] = useState("");
@@ -221,7 +222,6 @@ export default function Form(props) {
                         })}
                     </div>
 
-                    <Budget></Budget>
                 </div>
                 : <h1>Chargement...</h1>}
 

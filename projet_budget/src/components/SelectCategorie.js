@@ -1,4 +1,5 @@
 import React, {useCallback, useEffect, useState} from "react";
+import {Categorie} from "./Categorie";
 
 export default function SelectCategorie(props) {
     let [valueOption, setValueOption] = useState("");
@@ -20,18 +21,19 @@ export default function SelectCategorie(props) {
     return (
         <>
 
-                <select>
+            <select onClick={fetchAPI}>
+                <option>Please choose one option</option>
+                {textp.map((option, index) => {
+                    return <option onClick={() => {
+                        fetchAPI();
+                        props.categorie(props.id);
+                    }} key={option.id}>
+                        {option.id} {" " + option.description}{" "+option.categorie}
 
-                    <option>Please choose one option</option>
-                    {textp.map((option, index) => {
-                        return <option onClick={() => {
-                            props.categorie(props.id);
-                        }} key={option.id}>
-                            {option.id} {" " + option.description}
+                    </option>
+                })}
+            </select>
 
-                        </option>
-                    })}
-                </select>
         </>)
 
 }

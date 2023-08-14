@@ -1,5 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import Graph from "./Graph";
+import Navigation from "./Navigation";
 
 
 export function Budget(props) {
@@ -214,7 +215,7 @@ export function Budget(props) {
         /////////////////////////
         return (
             <div>
-
+                <Navigation></Navigation>
                 <form>
                     <label id="idLabel">
                         id:{idMontant} </label>
