@@ -30,20 +30,20 @@ export function Budget(props) {
         ////////////////////////Rechercher/////////////
         let recherche = async (e) => {
             e.preventDefault();
-            if (valueInput === "") {
-                console.log("test0");
-                await fetchAPI();
+            if (montant === 0) {
+                let f = await fetchAPI();
+                await setText(f);
             } else {
                 let f = await fetchAPI();
                 await console.log(f);
-                await valueInput;
-                let tab = await f.filter((elemt) =>
-                    elemt.title === valueInput
-                    || elemt.description === valueInputDescription
+                let tab = await f.filter((elemt) => {
+                        return ("" + elemt.montant === "" + montant)
+                    }
                 );
                 await setText(tab);
-                await console.log("bb");
             }
+
+
         };
         ////////////////////////////////////////////
         ///////////////////fectchApi/////////////////////////
@@ -221,6 +221,8 @@ export function Budget(props) {
                             <th>Id</th>
                             <th>Montant</th>
                             <th>Description</th>
+                            <th>Categorie</th>
+                            <th>CategorieDescription</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -236,6 +238,8 @@ export function Budget(props) {
                                         <th>{item.id}</th>
                                         <th className="montant">{item.montant}</th>
                                         <th className="description">{item.description}</th>
+                                        <th className="description">{item.categorie.id}</th>
+                                        <th className="description">{item.categorie.description}</th>
                                     </tr>
                                 </>
                             );
