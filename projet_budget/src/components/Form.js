@@ -175,28 +175,33 @@ export default function Form(props) {
 
     return (
 
-        <>
-            {!load ? <div>
-                    <Navigation></Navigation>
-                    <form>
-                        <label id="idLabel">
-                            id:{idVal} </label>
-                        <div className="container">
-                            <div>
-                                <label>Titre</label>
-                                <input value={valueInput} onChange={(e) => Valuechange(e)}/>{" "}
-                                <p className="error">{messageErrorTitre}</p>
-                            </div>
-                            <div>
-                                <label>Description</label>
-                                <textarea value={valueInputDescription} onChange={(e) => valueChangeDescription(e)}/>{" "}
-                                <p className="error">{messageErrorDescription}</p>
-                            </div>
-                            <button onClick={modifier}>modifier</button>
-                            <button onClick={fetchCreer}>creer</button>
-                            <button onClick={recherche}>Rechercher</button>
-                        </div>
-                    </form>
+        <> <Navigation></Navigation>
+            <div className="container">
+
+            <form>
+                <label id="idLabel">
+                    id:{idVal} </label>
+                <div className="container">
+                    <div>
+                        <label>Titre</label>
+                        <input value={valueInput} onChange={(e) => Valuechange(e)}/>{" "}
+                        <p className="error">{messageErrorTitre}</p>
+                    </div>
+                    <div>
+                        <label>Description</label>
+                        <textarea value={valueInputDescription} onChange={(e) => valueChangeDescription(e)}/>{" "}
+                        <p className="error">{messageErrorDescription}</p>
+                    </div>
+                    <button onClick={modifier}>modifier</button>
+                    <button onClick={fetchCreer}>creer</button>
+                    <button onClick={recherche}>Rechercher</button>
+                </div>
+            </form>
+                <Budget></Budget>
+            </div>
+            {!load ? <div className="container">
+
+
                     <div className="container2">
                         {textp.map((item, index) => {
                             return (
@@ -212,7 +217,7 @@ export default function Form(props) {
                             );
                         })}
                     </div>
-                    <Budget></Budget>
+
 
                 </div>
                 : <h1>Chargement...</h1>}

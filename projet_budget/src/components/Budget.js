@@ -1,7 +1,10 @@
 import React, {useCallback, useEffect, useState} from 'react';
+import SelectCategorie from "./SelectCategorie";
 
 
 export function Budget(props) {
+
+
     {
         let [actionDescription, setActionDescription] = useState("");
         let [idMontant, setIdMontant] = useState(-1);
@@ -14,9 +17,24 @@ export function Budget(props) {
         let [valueInputDescription, setDescription] = useState("");
         let [idVal, setId] = useState(-1);
         let [textp, setText] = useState([]);
+        let [textCat, setTextCat] = useState([]);
         let [montantTotal, setMontantTotal] = useState(0);
         const [load, setLoad] = useState(false);
 
+
+        const fetchAPICat = useCallback(async () => {
+            const response = await fetch("http://localhost:3004/categorie");
+            const resbis = await response.json();
+            await setTextCat(resbis);
+
+            return resbis;
+        }, [setText]);
+
+        let idCategorie = (data) => {
+            let str=""+data
+            str=str.split(" ")[0];
+            setActionCategorie(str);
+        };
         let attendre = () => {
             setLoad(true);
             setTimeout(() => {
@@ -26,6 +44,8 @@ export function Budget(props) {
         };
         useEffect(() => {
             attendre();
+            fetchAPI();
+            fetchAPICat();
         }, []);
         ////////////////////////Rechercher/////////////
         let recherche = async (e) => {
@@ -193,7 +213,16 @@ export function Budget(props) {
                         </div>
                         <div>
                             <label>Categorie</label>
-                            <input value={actionCategorie} onChange={(e) => setActionCategorie(e.target.value)}/>{" "}
+                            <select>
+                                {textCat.map((option, index) => {
+                                    return <option onClick={() => {
+                                        setActionCategorie(option.id)
+                                    }} key={option.id}>
+                                        {option.id} {" " + option.description}
+
+                                    </option>
+                                })}
+                            </select>
                             <p className="error">{actionCategorieError}</p>
                         </div>
                         <div>
