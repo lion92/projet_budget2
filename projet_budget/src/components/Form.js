@@ -2,6 +2,7 @@ import {useCallback, useEffect, useState} from "react";
 import Item from "./Item";
 import Navigation from "./Navigation";
 import Budget from "./Budget";
+import Graph from "./Graph";
 
 export default function Form(props) {
     let [valueInput, setValue] = useState("");
@@ -13,6 +14,8 @@ export default function Form(props) {
     let [textp, setText] = useState([]);
     ///////////////////////////
     const [load, setLoad] = useState(false);
+
+
 
     let attendre = () => {
         setLoad(true);
@@ -178,25 +181,25 @@ export default function Form(props) {
         <> <Navigation></Navigation>
             <div className="container">
 
-            <form>
-                <label id="idLabel">
-                    id:{idVal} </label>
-                <div className="container">
-                    <div>
-                        <label>Titre</label>
-                        <input value={valueInput} onChange={(e) => Valuechange(e)}/>{" "}
-                        <p className="error">{messageErrorTitre}</p>
+                <form>
+                    <label id="idLabel">
+                        id:{idVal} </label>
+                    <div className="container">
+                        <div>
+                            <label>Titre</label>
+                            <input value={valueInput} onChange={(e) => Valuechange(e)}/>{" "}
+                            <p className="error">{messageErrorTitre}</p>
+                        </div>
+                        <div>
+                            <label>Description</label>
+                            <textarea value={valueInputDescription} onChange={(e) => valueChangeDescription(e)}/>{" "}
+                            <p className="error">{messageErrorDescription}</p>
+                        </div>
+                        <button onClick={modifier}>modifier</button>
+                        <button onClick={fetchCreer}>creer</button>
+                        <button onClick={recherche}>Rechercher</button>
                     </div>
-                    <div>
-                        <label>Description</label>
-                        <textarea value={valueInputDescription} onChange={(e) => valueChangeDescription(e)}/>{" "}
-                        <p className="error">{messageErrorDescription}</p>
-                    </div>
-                    <button onClick={modifier}>modifier</button>
-                    <button onClick={fetchCreer}>creer</button>
-                    <button onClick={recherche}>Rechercher</button>
-                </div>
-            </form>
+                </form>
                 <Budget></Budget>
             </div>
             {!load ? <div className="container">
@@ -206,13 +209,13 @@ export default function Form(props) {
                         {textp.map((item, index) => {
                             return (
                                 <Item
-                                      del={del}
-                                      changeDec={textebisDesc}
-                                      changetext={textebis}
-                                      updatefunc={idchange}
-                                      title={item.title}
-                                      description={item.description}
-                                      id={item.id}
+                                    del={del}
+                                    changeDec={textebisDesc}
+                                    changetext={textebis}
+                                    updatefunc={idchange}
+                                    title={item.title}
+                                    description={item.description}
+                                    id={item.id}
                                 ></Item>
                             );
                         })}

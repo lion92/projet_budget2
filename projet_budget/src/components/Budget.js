@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import SelectCategorie from "./SelectCategorie";
+import Graph from "./Graph";
 
 
 export function Budget(props) {
@@ -20,7 +20,18 @@ export function Budget(props) {
         let [textCat, setTextCat] = useState([]);
         let [montantTotal, setMontantTotal] = useState(0);
         const [load, setLoad] = useState(false);
+        const data = {
+            labels: textp.map(value => value.description),
+            datasets: [
+                {
+                    label: 'Red2',
+                    data: textp.map(value => value.montant),
+                    backgroundColor: textp.map(value =>{ return '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')}),
+                    borderColor: 'black',
 
+                }
+            ]
+        };
 
         const fetchAPICat = useCallback(async () => {
             const response = await fetch("http://localhost:3004/categorie");
@@ -31,8 +42,8 @@ export function Budget(props) {
         }, [setText]);
 
         let idCategorie = (data) => {
-            let str=""+data
-            str=str.split(" ")[0];
+            let str = "" + data
+            str = str.split(" ")[0];
             setActionCategorie(str);
         };
         let attendre = () => {
@@ -244,6 +255,7 @@ export function Budget(props) {
 
                 </form>
                 <div className="container">
+                    <Graph data={data}></Graph>
                     <table>
                         <thead>
                         <tr>

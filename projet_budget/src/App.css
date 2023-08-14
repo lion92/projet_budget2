@@ -158,6 +158,15 @@ body{
 li{
   list-style: none;
 }
+.containerGraph{
+  display: flex;
+  flex-wrap: wrap;
+}
+.cardGraph{
+  padding: 1%;
+  flex: 1 0 50%;
+  height: 50vh;
+}
 @media only screen and (max-width: 768px) {
   .container {
     display: flex;
