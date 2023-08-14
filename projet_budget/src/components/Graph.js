@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pie} from 'react-chartjs-2'
+import {Bar, Pie} from 'react-chartjs-2'
 
 export default function Graph(props) {
     return (
@@ -8,6 +8,11 @@ export default function Graph(props) {
                 <Pie data={props.data}
 
                 />
+
+            </div>
+            <div className="cardGraph">
+                <Bar data={props.data}></Bar>
+
             </div>
 
         </div>

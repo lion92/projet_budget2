@@ -163,9 +163,8 @@ li{
   flex-wrap: wrap;
 }
 .cardGraph{
-  padding: 1%;
   flex: 1 0 50%;
-  height: 50vh;
+  height: 100%;
 }
 @media only screen and (max-width: 768px) {
   .container {

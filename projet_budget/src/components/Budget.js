@@ -24,7 +24,7 @@ export function Budget(props) {
             labels: textp.map(value => value.description),
             datasets: [
                 {
-                    label: 'Red2',
+                    label: 'Graphique',
                     data: textp.map(value => value.montant),
                     backgroundColor: textp.map(value =>{ return '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')}),
                     borderColor: 'black',
@@ -214,6 +214,7 @@ export function Budget(props) {
         /////////////////////////
         return (
             <div>
+
                 <form>
                     <label id="idLabel">
                         id:{idMontant} </label>
@@ -255,7 +256,7 @@ export function Budget(props) {
 
                 </form>
                 <div className="container">
-                    <Graph data={data}></Graph>
+
                     <table>
                         <thead>
                         <tr>
@@ -293,8 +294,9 @@ export function Budget(props) {
                         </tr>
                         </tfoot>
                     </table>
-                </div>
 
+                </div>
+                <Graph data={data}></Graph>
             </div>
         );
     }

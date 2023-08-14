@@ -200,12 +200,12 @@ export default function Form(props) {
                         <button onClick={recherche}>Rechercher</button>
                     </div>
                 </form>
-                <Budget></Budget>
+
             </div>
             {!load ? <div className="container">
 
 
-                    <div className="container2">
+                    <div className="container">
                         {textp.map((item, index) => {
                             return (
                                 <Item
@@ -221,7 +221,7 @@ export default function Form(props) {
                         })}
                     </div>
 
-
+                    <Budget></Budget>
                 </div>
                 : <h1>Chargement...</h1>}
 
