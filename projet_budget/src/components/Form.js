@@ -201,13 +201,13 @@ export default function Form(props) {
                         {textp.map((item, index) => {
                             return (
                                 <Item
-                                    del={del}
-                                    changeDec={textebisDesc}
-                                    changetext={textebis}
-                                    updatefunc={idchange}
-                                    title={item.title}
-                                    description={item.description}
-                                    id={item.id}
+                                      del={del}
+                                      changeDec={textebisDesc}
+                                      changetext={textebis}
+                                      updatefunc={idchange}
+                                      title={item.title}
+                                      description={item.description}
+                                      id={item.id}
                                 ></Item>
                             );
                         })}

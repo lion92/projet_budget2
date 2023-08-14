@@ -5,7 +5,6 @@
   padding: 0;
   box-sizing: border-box;
   text-align: center;
-  font-size: 28px;
   font-family: 'Calligraffitti', cursive;
 }
 .error{
@@ -30,7 +29,6 @@ body {
   flex-wrap: wrap;
   align-items: center;
 
-
 }
 .montantDiv {
   display: flex;
@@ -49,12 +47,8 @@ body {
 }
 
 .container2 div {
-  height: 10em;
-  width: 10em;
   padding: 1em;
   margin: 1em;
-
-
   text-align: center;
 }
 
@@ -110,16 +104,11 @@ li {
   flex-direction: column;
   justify-content: center;
 
-  height: 50%;
-  width: 50%;
-
 }
 
 #iconLogin {
   margin-top: 10%;
   border-radius: 50%;
-  height: 200px;
-  width: 200px;
   background-size: cover;
   background-repeat: no-repeat;
   background-image: url(https://projet.krissclotilde.com/asset/avatar-gratuit.png);
@@ -133,7 +122,6 @@ li {
 
 #mdpOublie {
   margin-top: 10px;
-  font-size: 20px;
 
 }
 
@@ -212,8 +200,6 @@ li{
     flex-direction: column;
     justify-content: center;
 
-    height: 50%;
-    width: 50%;
   }
   .card {
     background: none;
@@ -221,7 +207,14 @@ li{
 
   }
 }
-@media only screen and (min-width: 1200px) {
+@media only screen and (max-width: 700px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: 'Calligraffitti', cursive;
+  }
   #containerTitle {
 
     background-color: cornflowerblue;
