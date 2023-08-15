@@ -1,5 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import Navigation from "./Navigation";
+import Item from "./Item";
 
 
 export function Categorie(props) {
@@ -12,6 +13,7 @@ export function Categorie(props) {
         let [valueInput, setValue] = useState("");
         let [valueInputDescription, setDescription] = useState("");
         let [idVal, setId] = useState(-1);
+        let [categorieCard, setCategorieCard] = useState([]);
         const [load, setLoad] = useState(false);
 
 
@@ -37,6 +39,7 @@ export function Categorie(props) {
         };
         //////////////////////////appel api en debut
         useEffect(() => {
+            fetchAPI();
 
         }, []);
         ////////////////////////////////////////supprimme des tache
@@ -65,9 +68,17 @@ export function Categorie(props) {
                     },
                 }
             );
+            await fetchAPI();
 
             const resbis = await response;
         });
+        const fetchAPI = useCallback(async () => {
+            const response = await fetch("http://localhost:3004/categorie");
+            const resbis = await response.json();
+            await setCategorieCard(resbis);
+
+            return resbis;
+        }, [setCategorieCard]);
         //////////////////////insert tache
         let fetchCreer = useCallback(async (e) => {
             e.preventDefault();
@@ -84,7 +95,7 @@ export function Categorie(props) {
                     },
                 }
             );
-
+          await  fetchAPI();
         });
         ////////////////////update////////////
         let fetchAPIupdate = useCallback(async () => {
@@ -102,6 +113,7 @@ export function Categorie(props) {
                 }
             );
             const resbis = await response;
+           await fetchAPI()
         });
         ////////////////////////input change value
         let Valuechange = (e) => {
@@ -159,7 +171,32 @@ export function Categorie(props) {
                             <label>Categorie</label>
                             <input value={categorie} onChange={(e) => setCategorie(e.target.value)}/>{" "}
                         </div>
+                        <div className="container">
+                            {categorieCard.map((item, index) => {
+                                return (<div>
+
+                                        <Item Onclick={() => {
+                                            setId(item.id);
+                                            setCategorieDescription(item.description);
+                                            setCategorie(item.categorie)
+                                        }}
+                                              del={del}
+                                              changeDec={textebisDesc}
+                                              changetext={textebis}
+                                              updatefunc={idchange}
+                                              title={item.description}
+                                              description={item.categorie}
+                                              id={item.id}
+                                        ></Item>
+
+                                        <label>id</label>
+                                        <span>{item.id}</span>
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </div>
+
                     <button onClick={modifier}>modifier</button>
                     <button onClick={fetchCreer}>creer</button>
                     <button onClick={deleteMontant}>Supprimer</button>

@@ -277,6 +277,7 @@ export function Budget(props) {
                             <th>Description</th>
                             <th>Categorie</th>
                             <th>CategorieDescription</th>
+                            <th>Date d'ajout de la dépense</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -294,6 +295,7 @@ export function Budget(props) {
                                         <th className="description">{item.description}</th>
                                         <th className="description">{item.categorie.id}</th>
                                         <th className="description">{item.categorie.description}</th>
+                                        <th className="description">{item.dateAjout}</th>
                                     </tr>
                                 </>
                             );
