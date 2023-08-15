@@ -23,7 +23,7 @@ export function Budget(props) {
         let [textCat2,setTextCat2] = useState([]);
         const [load, setLoad] = useState(false);
         const data = {
-            labels: textCat2.map(value => value.categorieId),
+            labels: textCat2.map(value => value.description),
             datasets: [
                 {
                     label: 'Graphique',
@@ -84,7 +84,7 @@ export function Budget(props) {
                 await setText(tab);
             }
 
-
+            fetchAPICat2();
         };
         ////////////////////////////////////////////
         ///////////////////fectchApi/////////////////////////
@@ -158,6 +158,7 @@ export function Budget(props) {
             );
             const resbis = await response;
             await fetchAPI();
+            fetchAPICat2();
 
         });
         ////////////////////update////////////
@@ -179,6 +180,7 @@ export function Budget(props) {
             );
             const resbis = await response;
             await fetchAPI();
+            fetchAPICat2();
         });
         ////////////////////////input change value
         let Valuechange = (e) => {
