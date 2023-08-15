@@ -20,19 +20,27 @@ export function Budget(props) {
         let [textp, setText] = useState([]);
         let [textCat, setTextCat] = useState([]);
         let [montantTotal, setMontantTotal] = useState(0);
+        let [textCat2,setTextCat2] = useState([]);
         const [load, setLoad] = useState(false);
         const data = {
-            labels: textp.map(value => value.description),
+            labels: textCat2.map(value => value.categorieId),
             datasets: [
                 {
                     label: 'Graphique',
-                    data: textp.map(value => value.montant),
-                    backgroundColor: textp.map(value =>{ return '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')}),
+                    data: textCat2.map(value => value.montant),
+                    backgroundColor: textCat2.map(value =>{ return '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')}),
                     borderColor: 'black',
 
                 }
             ]
         };
+        const fetchAPICat2 = useCallback(async () => {
+            const response = await fetch("http://localhost:3004/action/categorie/sum");
+            const resbis = await response.json();
+            await setTextCat2(resbis);
+
+            return resbis;
+        }, [setTextCat2]);
 
         const fetchAPICat = useCallback(async () => {
             const response = await fetch("http://localhost:3004/categorie");
@@ -58,6 +66,7 @@ export function Budget(props) {
             attendre();
             fetchAPI();
             fetchAPICat();
+            fetchAPICat2();
         }, []);
         ////////////////////////Rechercher/////////////
         let recherche = async (e) => {

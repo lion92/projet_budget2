@@ -8,7 +8,7 @@ export function Categorie(props) {
     {
         let [categorieDescription, setCategorieDescription] = useState("");
         let [idCategorieValue, setidCategorieValue] = useState(-1);
-        let [categorie, setCategorie] = useState("");
+        let [categorie, setCategorie] = useState(0);
         let [valueInput, setValue] = useState("");
         let [valueInputDescription, setDescription] = useState("");
         let [idVal, setId] = useState(-1);
