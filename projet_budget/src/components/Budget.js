@@ -20,7 +20,7 @@ export function Budget(props) {
         let [textp, setText] = useState([]);
         let [textCat, setTextCat] = useState([]);
         let [montantTotal, setMontantTotal] = useState(0);
-        let [textCat2,setTextCat2] = useState([]);
+        let [textCat2, setTextCat2] = useState([]);
         const [load, setLoad] = useState(false);
         const data = {
             labels: textCat2.map(value => value.description),
@@ -28,7 +28,9 @@ export function Budget(props) {
                 {
                     label: 'Graphique',
                     data: textCat2.map(value => value.montant),
-                    backgroundColor: textCat2.map(value =>{ return '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')}),
+                    backgroundColor: textCat2.map(value => {
+                        return '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')
+                    }),
                     borderColor: 'black',
 
                 }
@@ -136,6 +138,7 @@ export function Budget(props) {
 
             const resbis = await response;
             await fetchAPI();
+            await fetchAPICat2()
         });
         //////////////////////insert tache
         let fetchCreer = useCallback(async (e) => {
@@ -230,12 +233,13 @@ export function Budget(props) {
                 <form>
                     <label id="idLabel">
                         id:{idMontant} </label>
-                    <div className="container">
-                        <div>
+                    <div className="containerGraph">
+
+                        <div className="containerGraph">
+                            <div>
                             <label>IdMontant</label>
                             <input value={idMontant} onChange={(e) => setIdMontant(e.target.value)}/>{" "}
                         </div>
-                        <div>
                             <label>Categorie</label>
                             <select>
                                 {textCat.map((option, index) => {
@@ -277,6 +281,7 @@ export function Budget(props) {
                             <th>Description</th>
                             <th>Categorie</th>
                             <th>CategorieDescription</th>
+                            <th>Categorie</th>
                             <th>Date d'ajout de la dépense</th>
                         </tr>
                         </thead>
@@ -295,7 +300,9 @@ export function Budget(props) {
                                         <th className="description">{item.description}</th>
                                         <th className="description">{item.categorie.id}</th>
                                         <th className="description">{item.categorie.description}</th>
+                                        <th className="description">{item.categorie.categorie}</th>
                                         <th className="description">{item.dateAjout}</th>
+
                                     </tr>
                                 </>
                             );

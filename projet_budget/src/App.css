@@ -6,6 +6,12 @@
   box-sizing: border-box;
   text-align: center;
   font-family: 'Calligraffitti', cursive;
+  text-decoration:none;
+  font-size: 28px;
+}
+h1{
+  font-size: 60px;
+  color: #9e0c0c;
 }
 .error{
   font-size: 15px;
@@ -24,7 +30,7 @@ body {
 
 .container {
   display: flex;
-  background: #42a6ba;
+
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
@@ -32,7 +38,7 @@ body {
 }
 .montantDiv {
   display: flex;
-  background: #42a6ba;
+
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -55,11 +61,29 @@ body {
 input {
   background-color: #a2b8b8;
   padding: 0.2em;
+  width: 200px;
+}
+li{
+  font-size: 40px;
+  padding: 0.2em;
+  background-color: #54b6a6;
+}
+li:hover{
+  margin: 0.1em;
+  background-color: cornflowerblue;
+}
+a{
+  color: #3c88e4;
+
 }
 
 .card {
   background: #3f80c5;
   border: solid 5px #54b6a6;
+  height: 200px;
+  width: 300px;
+  border-radius: 10px;
+  margin-left: 20px;
 
 }
 
@@ -81,28 +105,25 @@ li {
   color: #dcdce7
 }
 
-#container {
-
+.container {
   margin: auto;
   margin-top: 3em;
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
   flex-direction: column;
-
-  height: 50%;
-  width: 50%;
+  height: 50vh;
+  width: 50vw;
+  font-size: 26px;
 
 }
 
 #containerTitle {
-  margin: auto;
-  margin-top: 3em;
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
-  flex-direction: column;
   justify-content: center;
+  flex-direction: row;
+
 
 }
 
@@ -140,8 +161,7 @@ li {
   font-weight: bold;
   font-size: 1em;
   text-align: center;
-  background-color: oldlace;
-  color: #60ac98;
+
   padding: 0.5em;
 }
 #idLabel{
@@ -157,10 +177,15 @@ body{
 }
 li{
   list-style: none;
+  color: #9e0c0c;
 }
 .containerGraph{
   display: flex;
   flex-wrap: wrap;
+}
+select{
+  width: 200px;
+  height: 60px;
 }
 .cardGraph{
   flex: 1 0 50%;
@@ -179,6 +204,7 @@ li{
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    background-color: #9e0c0c;
   }
   #btnLogin {
     border-radius: 10%;
@@ -239,7 +265,7 @@ li{
     align-items: center;
     flex-direction: column;
     border: #3f80c5 3px solid;
-    background-color: #54b6a6;
+    background-color: #b5d3ce;
 
   }
 }

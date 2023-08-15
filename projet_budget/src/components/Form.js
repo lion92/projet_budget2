@@ -180,12 +180,12 @@ export default function Form(props) {
     return (
 
         <> <Navigation></Navigation>
-            <div className="container">
+            <div>
 
                 <form>
                     <label id="idLabel">
                         id:{idVal} </label>
-                    <div className="container">
+                    <div className="containerGraph">
                         <div>
                             <label>Titre</label>
                             <input value={valueInput} onChange={(e) => Valuechange(e)}/>{" "}
@@ -196,17 +196,20 @@ export default function Form(props) {
                             <textarea value={valueInputDescription} onChange={(e) => valueChangeDescription(e)}/>{" "}
                             <p className="error">{messageErrorDescription}</p>
                         </div>
-                        <button onClick={modifier}>modifier</button>
-                        <button onClick={fetchCreer}>creer</button>
-                        <button onClick={recherche}>Rechercher</button>
+                        <div>
+                            <button onClick={modifier}>modifier</button>
+                            <button onClick={fetchCreer}>creer</button>
+                            <button onClick={recherche}>Rechercher</button>
+                        </div>
+
                     </div>
                 </form>
 
             </div>
-            {!load ? <div className="container">
+            {!load ? <div>
 
 
-                    <div className="container">
+                    <div className="containerGraph">
                         {textp.map((item, index) => {
                             return (
                                 <Item

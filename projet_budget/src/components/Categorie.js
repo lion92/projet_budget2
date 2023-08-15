@@ -9,7 +9,7 @@ export function Categorie(props) {
     {
         let [categorieDescription, setCategorieDescription] = useState("");
         let [idCategorieValue, setidCategorieValue] = useState(-1);
-        let [categorie, setCategorie] = useState(0);
+        let [categorie, setCategorie] = useState("");
         let [valueInput, setValue] = useState("");
         let [valueInputDescription, setDescription] = useState("");
         let [idVal, setId] = useState(-1);
@@ -49,11 +49,11 @@ export function Categorie(props) {
         };
         ///////////////////////////////////////////////////////////remonter le texte
         let textebis = (data) => {
-            setValue(data);
+            setCategorieDescription(data);
         };
         ///////////////////////////////////////////////////////////remonter le texte
         let textebisDesc = (data) => {
-            setDescription(data);
+            setCategorie(data);
         };
         /////////////////////////////
         ///////////////////////////appel delete
@@ -95,12 +95,12 @@ export function Categorie(props) {
                     },
                 }
             );
-          await  fetchAPI();
+            await fetchAPI();
         });
         ////////////////////update////////////
         let fetchAPIupdate = useCallback(async () => {
             const response = await fetch(
-                "http://localhost:3004/categorie/" + idCategorieValue,
+                "http://localhost:3004/categorie/" + idVal,
                 {
                     method: "PUT",
                     body: JSON.stringify({
@@ -113,7 +113,7 @@ export function Categorie(props) {
                 }
             );
             const resbis = await response;
-           await fetchAPI()
+            await fetchAPI()
         });
         ////////////////////////input change value
         let Valuechange = (e) => {
@@ -161,7 +161,8 @@ export function Categorie(props) {
             <div>
                 <Navigation></Navigation>
                 <form>
-                    <div className="container">
+                    <div className="containerGraph">
+
                         <div>
                             <label>Description</label>
                             <input value={categorieDescription}
@@ -171,22 +172,25 @@ export function Categorie(props) {
                             <label>Categorie</label>
                             <input value={categorie} onChange={(e) => setCategorie(e.target.value)}/>{" "}
                         </div>
-                        <div className="container">
+                        <div className="containerGraph">
+                            <button onClick={modifier}>modifier</button>
+                            <button onClick={fetchCreer}>creer</button>
+                            <button onClick={deleteMontant}>Supprimer</button>
+                        </div>
+
+                        <div className="containerGraph">
+
                             {categorieCard.map((item, index) => {
                                 return (<div>
 
-                                        <Item Onclick={() => {
-                                            setId(item.id);
-                                            setCategorieDescription(item.description);
-                                            setCategorie(item.categorie)
-                                        }}
-                                              del={del}
-                                              changeDec={textebisDesc}
-                                              changetext={textebis}
-                                              updatefunc={idchange}
-                                              title={item.description}
-                                              description={item.categorie}
-                                              id={item.id}
+                                        <Item
+                                            del={del}
+                                            changeDec={textebisDesc}
+                                            changetext={textebis}
+                                            updatefunc={idchange}
+                                            title={item.description}
+                                            description={item.categorie}
+                                            id={item.id}
                                         ></Item>
 
                                         <label>id</label>
@@ -197,9 +201,6 @@ export function Categorie(props) {
                         </div>
                     </div>
 
-                    <button onClick={modifier}>modifier</button>
-                    <button onClick={fetchCreer}>creer</button>
-                    <button onClick={deleteMontant}>Supprimer</button>
 
                 </form>
             </div>

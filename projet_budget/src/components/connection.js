@@ -54,12 +54,12 @@ const Connection = () => {
     });
 
     return (
-        <div>
+        <div className="container">
             {(probleme === "connecte") ? (<Form></Form>) : ''
             }
             {(probleme !== "connecte") ? (
                 <>
-                    <div id='container'>
+                    <div>
                         <Navigation></Navigation>
                         <div>{messageLog}</div>
                         <div id="iconLogin"/>

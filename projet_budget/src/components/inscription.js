@@ -75,7 +75,7 @@ const Inscription = () => {
     return (
 
         <div>
-            <div id='container'>
+            <div>
                 <Navigation></Navigation>
                 <div id="iconLogin"/>
                 <div>
