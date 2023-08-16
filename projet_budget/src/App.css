@@ -1,271 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap');
+@import "https://unpkg.com/water.css@2/out/water.min.css";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  text-align: center;
-  font-family: 'Calligraffitti', cursive;
-  text-decoration:none;
-  font-size: 28px;
-}
-h1{
-  font-size: 60px;
-  color: #9e0c0c;
-}
-.error{
-  font-size: 15px;
-  color: #9e0c0c;
-}
-.montant{
-  font-size: 25px;
-  color: #9e0c0c;
-  font-weight: bold;
-  background-color: #54b6a6;
-}
 body {
-  background-color: #5ec8d0;
-  margin: 10em;
-}
-
-.container {
-  display: flex;
-
-  justify-content: center;
-  flex-wrap: wrap;
-  align-items: center;
-
-}
-.montantDiv {
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.container2 {
-  display: flex;
-
-  justify-content: center;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.container2 div {
-  padding: 1em;
-  margin: 1em;
-  text-align: center;
-}
-
-input {
-  background-color: #a2b8b8;
-  padding: 0.2em;
-  width: 200px;
-}
-li{
-  font-size: 40px;
-  padding: 0.2em;
-  background-color: #54b6a6;
-}
-li:hover{
-  margin: 0.1em;
-  background-color: cornflowerblue;
-}
-a{
-  color: #3c88e4;
-
-}
-
-.card {
-  background: #3f80c5;
-  border: solid 5px #54b6a6;
-  height: 200px;
-  width: 300px;
-  border-radius: 10px;
-  margin-left: 20px;
-
-}
-
-button {
-  padding: 5px;
-  margin: 1em;
-
-  border-radius: 10%;
-  border: solid 1px black;
-
-
-}
-
-h1 {
-  color: bisque;
-}
-
-li {
-  color: #dcdce7
-}
-
-.container {
-  margin: auto;
-  margin-top: 3em;
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  height: 50vh;
-  width: 50vw;
-  font-size: 26px;
-
-}
-
-#containerTitle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-
-
-}
-
-#iconLogin {
-  margin-top: 10%;
-  border-radius: 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url(https://projet.krissclotilde.com/asset/avatar-gratuit.png);
-}
-
-#email, #password {
-  margin-top: 0.3em;
-  background-color: #a18dcd;
-
-}
-
-#mdpOublie {
-  margin-top: 10px;
-
-}
-
-#btnLogin {
-  border-radius: 10%;
-  margin-top: 0.3em;
-  font-weight: bold;
-  font-size: 1em;
-  text-align: center;
-  padding: 0.5em;
-
-}
-
-#btnSignup {
-  border-radius: 10%;
-  font-weight: bold;
-  font-size: 1em;
-  text-align: center;
-
-  padding: 0.5em;
-}
-#idLabel{
-  position: relative;
-  left: 0;
-}
-body{
-  background-image:url('components/fondTodo.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position-Y: -700px;
-
-}
-li{
-  list-style: none;
-  color: #9e0c0c;
-}
-.containerGraph{
-  display: flex;
-  flex-wrap: wrap;
-}
-select{
-  width: 200px;
-  height: 60px;
-}
-.cardGraph{
-  flex: 1 0 50%;
-  height: 100%;
-}
-@media only screen and (max-width: 768px) {
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-  }
-  #container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #9e0c0c;
-  }
-  #btnLogin {
-    border-radius: 10%;
-    margin-top: 0.3em;
-    font-weight: bold;
     font-size: 1em;
-    text-align: center;
-
-    padding: 0.5em;
-
-  }
-
-  #btnSignup {
-    border-radius: 10%;
-    font-weight: bold;
-    font-size: 1em;
-    text-align: center;
-
-    padding: 0.5em;
-  }
-  #containerTitle {
-
-
-    display: flex;
-    align-items: center;
-
-    flex-direction: column;
-    justify-content: center;
-
-  }
-  .card {
-    background: none;
-    border: none;
-
-  }
 }
-@media only screen and (max-width: 700px) {
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-align: center;
-    font-family: 'Calligraffitti', cursive;
-  }
-  #containerTitle {
 
-    background-color: cornflowerblue;
-    border: #54b6a6 3px solid;
+section {
     display: flex;
-    align-items: center;
-
-    flex-direction: column;
-    justify-content: center;
-  }
-  #container {
+}
+.container{
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    border: #3f80c5 3px solid;
-    background-color: #b5d3ce;
+    margin: 10px;
+}
 
-  }
+:root {
+    --links: #ddc4c4;
+    --background-body: #343137;
+}
+
+.containerTitle {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #262644;
+    border-radius: 999px;
+    text-decoration: none;;
+}
+
+a {
+    padding: 0.2em;
+    font-weight: bold;
+    font-size: large;
+}
+
+a:hover {
+    color: #171519;
+    font-size: 28px;
 }

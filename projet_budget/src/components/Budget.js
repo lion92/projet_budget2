@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import Graph from "./Graph";
 import Navigation from "./Navigation";
+import {Categorie} from "./Categorie";
 
 
 export function Budget(props) {
@@ -28,9 +29,7 @@ export function Budget(props) {
                 {
                     label: 'Graphique',
                     data: textCat2.map(value => value.montant),
-                    backgroundColor: textCat2.map(value => {
-                        return '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')
-                    }),
+                    backgroundColor: textCat2.map(value =>value.color),
                     borderColor: 'black',
 
                 }
@@ -230,6 +229,7 @@ export function Budget(props) {
         return (
             <div>
                 <Navigation></Navigation>
+
                 <form>
                     <label id="idLabel">
                         id:{idMontant} </label>
@@ -316,8 +316,8 @@ export function Budget(props) {
                         </tfoot>
                     </table>
 
-                </div>
-                <Graph data={data}></Graph>
+                </div><Graph data={data}></Graph>
+
             </div>
         );
     }

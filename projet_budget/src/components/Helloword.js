@@ -4,7 +4,7 @@ const Helloword = () => {
 
     return (
         <div>
-            <h1  style={{color: "black"}}></h1>
+            <h1>Hello, bienvenue pour gérer ton budget.</h1>
         </div>
     );
 };

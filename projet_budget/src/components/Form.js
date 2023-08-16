@@ -182,6 +182,7 @@ export default function Form(props) {
         <> <Navigation></Navigation>
             <div>
 
+
                 <form>
                     <label id="idLabel">
                         id:{idVal} </label>

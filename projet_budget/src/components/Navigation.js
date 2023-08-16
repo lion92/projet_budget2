@@ -5,7 +5,7 @@ import Helloword from "./Helloword";
 const Navigation = () => {
     return (
         <div>
-            <ul id='containerTitle' >
+            <ul className='containerTitle' >
                 <NavLink to={"/"}>
                     <li>Bienvenue</li>
                 </NavLink>
@@ -22,7 +22,7 @@ const Navigation = () => {
                     <li>Tache</li>
                 </NavLink>
                 <NavLink to={"/budget"}>
-                    <li>Buget</li>
+                    <li>Budget</li>
                 </NavLink>
 
 

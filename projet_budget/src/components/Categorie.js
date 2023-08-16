@@ -14,6 +14,7 @@ export function Categorie(props) {
         let [valueInputDescription, setDescription] = useState("");
         let [idVal, setId] = useState(-1);
         let [categorieCard, setCategorieCard] = useState([]);
+        let [colorCategorie, setColorCategorie] = useState("red");
         const [load, setLoad] = useState(false);
 
 
@@ -88,7 +89,8 @@ export function Categorie(props) {
                     method: "POST",
                     body: JSON.stringify({
                         categorie: categorie,
-                        description: categorieDescription
+                        description: categorieDescription,
+                        color:colorCategorie
                     }),
                     headers: {
                         "Content-Type": "application/json",
@@ -105,7 +107,8 @@ export function Categorie(props) {
                     method: "PUT",
                     body: JSON.stringify({
                         categorie: categorie,
-                        description: categorieDescription
+                        description: categorieDescription,
+                        color:colorCategorie
                     }),
                     headers: {
                         "Content-Type": "application/json",
@@ -162,6 +165,11 @@ export function Categorie(props) {
                 <Navigation></Navigation>
                 <form>
                     <div className="containerGraph">
+                        <div>
+                            {colorCategorie}
+                            <input type="color" id="favcolor" name="favcolor"  value={colorCategorie} onChange={(e) =>  {setColorCategorie(e.target.value); console.log(e.target.value)}}/>
+
+                        </div>
 
                         <div>
                             <label>Description</label>
@@ -181,7 +189,7 @@ export function Categorie(props) {
                         <div className="containerGraph">
 
                             {categorieCard.map((item, index) => {
-                                return (<div>
+                                return (<div  className="container" style={{backgroundColor:item.color}}>
 
                                         <Item
                                             del={del}
@@ -195,6 +203,8 @@ export function Categorie(props) {
 
                                         <label>id</label>
                                         <span>{item.id}</span>
+                                        {colorCategorie}
+
                                     </div>
                                 );
                             })}
