@@ -12,7 +12,7 @@ export default function Item(props) {
             }} className="card">
                 <h1>{props.title}</h1>
 
-                <p>{props.description}</p>
+                <p>{props.description} obligatoire pour une dépense</p>
                 <button onClick={(e) => props.del(e, props.id)}>delete</button>
             </div>
         </>

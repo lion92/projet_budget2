@@ -74,7 +74,8 @@ export function Categorie(props) {
             const resbis = await response;
         });
         const fetchAPI = useCallback(async () => {
-            const response = await fetch("http://localhost:3004/categorie");
+            let idUser=parseInt("" + localStorage.getItem("utilisateur"))
+            const response = await fetch("http://localhost:3004/categorie/byuser/"+idUser);
             const resbis = await response.json();
             await setCategorieCard(resbis);
 
@@ -90,7 +91,8 @@ export function Categorie(props) {
                     body: JSON.stringify({
                         categorie: categorie,
                         description: categorieDescription,
-                        color:colorCategorie
+                        color:colorCategorie,
+                        user: parseInt("" + localStorage.getItem("utilisateur"))
                     }),
                     headers: {
                         "Content-Type": "application/json",
@@ -108,7 +110,8 @@ export function Categorie(props) {
                     body: JSON.stringify({
                         categorie: categorie,
                         description: categorieDescription,
-                        color:colorCategorie
+                        color:colorCategorie,
+                        user: parseInt("" + localStorage.getItem("utilisateur"))
                     }),
                     headers: {
                         "Content-Type": "application/json",

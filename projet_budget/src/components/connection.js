@@ -54,7 +54,7 @@ const Connection = () => {
     });
 
     return (
-        <div className="container">
+        <div>
             {(probleme === "connecte") ? (<Form></Form>) : ''
             }
             {(probleme !== "connecte") ? (

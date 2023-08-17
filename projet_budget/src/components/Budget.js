@@ -1,7 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import Graph from "./Graph";
 import Navigation from "./Navigation";
-import {Categorie} from "./Categorie";
 
 
 export function Budget(props) {
@@ -24,7 +23,7 @@ export function Budget(props) {
         let [textCat2, setTextCat2] = useState([]);
         const [load, setLoad] = useState(false);
         const data = {
-            labels: textCat2.map(value => value.description),
+            labels: textCat2.map(value => value.categorie),
             datasets: [
                 {
                     label: 'Graphique',
@@ -36,7 +35,8 @@ export function Budget(props) {
             ]
         };
         const fetchAPICat2 = useCallback(async () => {
-            const response = await fetch("http://localhost:3004/action/categorie/sum");
+            let idUser=parseInt("" + localStorage.getItem("utilisateur"))
+            const response = await fetch("http://localhost:3004/action/categorie/sum/byUser/"+idUser);
             const resbis = await response.json();
             await setTextCat2(resbis);
 
@@ -44,7 +44,8 @@ export function Budget(props) {
         }, [setTextCat2]);
 
         const fetchAPICat = useCallback(async () => {
-            const response = await fetch("http://localhost:3004/categorie");
+            let idUser=parseInt("" + localStorage.getItem("utilisateur"))
+            const response = await fetch("http://localhost:3004/categorie/byuser/"+idUser);
             const resbis = await response.json();
             await setTextCat(resbis);
 
@@ -90,7 +91,8 @@ export function Budget(props) {
         ////////////////////////////////////////////
         ///////////////////fectchApi/////////////////////////
         const fetchAPI = useCallback(async () => {
-            const response = await fetch("http://localhost:3004/action");
+            let idUser=parseInt("" + localStorage.getItem("utilisateur"))
+            const response = await fetch("http://localhost:3004/action/byuser/"+idUser);
             const resbis = await response.json();
             await setText(resbis);
             setMontantTotal(resbis.map(val => val.montant).reduce(function (a, b) {
@@ -260,7 +262,7 @@ export function Budget(props) {
                                     return <option onClick={() => {
                                         setActionCategorie(option.id)
                                     }} key={option.id}>
-                                        {option.id} {" " + option.description}
+                                        {option.id +" "+option.categorie}
 
                                     </option>
                                 })}
@@ -296,8 +298,7 @@ export function Budget(props) {
                             <th>Id</th>
                             <th>Montant</th>
                             <th>Description</th>
-                            <th>Categorie</th>
-                            <th>CategorieDescription</th>
+                            <th>Categorie Id</th>
                             <th>Categorie</th>
                             <th>Date d'ajout de la dépense</th>
                         </tr>
@@ -315,9 +316,8 @@ export function Budget(props) {
                                         <th>{item.id}</th>
                                         <th className="montant">{item.montant}</th>
                                         <th className="description">{item.description}</th>
-                                        <th className="description">{item.categorie.id}</th>
-                                        <th className="description">{item.categorie.description}</th>
-                                        <th className="description">{item.categorie.categorie}</th>
+                                        <th className="description">{item.categorieId}</th>
+                                        <th className="description">{item.categorie}</th>
                                         <th className="description">{item.dateAjout}</th>
 
                                     </tr>
