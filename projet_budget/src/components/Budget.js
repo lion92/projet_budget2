@@ -99,6 +99,20 @@ export function Budget(props) {
             return resbis;
         }, [setText]);
 
+
+
+        const [data3, setData3] = useState('');
+        const getData = async (e) => {
+            e.preventDefault();
+            fetch("http://localhost:3004/action/export")
+                .then( res => res.blob() )
+                .then( blob => {
+                    var file = window.URL.createObjectURL(blob);
+                    window.location.assign(file);
+                });
+        }
+
+
         /////////////////////////////////////////
         ///////////////remonter au parent//////////////////////////////iddata/////////
         let idchange = (data) => {
@@ -269,6 +283,9 @@ export function Budget(props) {
                     <button onClick={fetchCreer}>creer</button>
                     <button onClick={deleteMontant}>Supprimer</button>
                     <button onClick={recherche}>Rechercher</button>
+                    <div>
+                        <button onClick={getData}>Download</button>
+                    </div>
 
                 </form>
                 <div className="container">

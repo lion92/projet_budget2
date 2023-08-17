@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.23.0",
     "chart.js": "^2.9.4",
+    "node-excel-export": "^1.4.4",
     "react": "^17.0.2",
     "react-chartjs-2": "^2.11.2",
     "react-color": "^2.19.3",
