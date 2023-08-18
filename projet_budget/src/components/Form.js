@@ -22,7 +22,7 @@ export default function Form(props) {
         setLoad(true);
         setTimeout(() => {
             setLoad(false);
-        }, 2000);
+        }, 500);
         console.log(load);
     };
     useEffect(() => {
