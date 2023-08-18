@@ -102,11 +102,10 @@ export function Budget(props) {
         }, [setText]);
 
 
-
-        const [data3, setData3] = useState('');
         const getData = async (e) => {
             e.preventDefault();
-            fetch("http://localhost:3004/action/export")
+            let idUser=parseInt("" + localStorage.getItem("utilisateur"));
+            fetch("http://localhost:3004/action/export/"+idUser)
                 .then( res => res.blob() )
                 .then( blob => {
                     var file = window.URL.createObjectURL(blob);

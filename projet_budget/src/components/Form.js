@@ -49,7 +49,8 @@ export default function Form(props) {
     ////////////////////////////////////////////
     ///////////////////fectchApi/////////////////////////
     const fetchAPI = useCallback(async () => {
-        const response = await fetch("http://localhost:3004/todos");
+        let idUser=parseInt("" + localStorage.getItem("utilisateur"))
+        const response = await fetch("http://localhost:3004/todos/byuser/"+idUser);
         const resbis = await response.json();
         await setText(resbis);
         return resbis;
