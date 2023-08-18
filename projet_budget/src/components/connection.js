@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Navigation from "./Navigation";
 import Form from "./Form";
 
@@ -8,7 +8,11 @@ const Connection = () => {
     const [mailError, setEmailError] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [probleme, setProbleme] = useState("");
+    const [probleme, setProbleme] = useState("non connecte");
+    useEffect(() => {
+        fetchUerToken();
+    }, []);
+
 
     function ValidateEmail(mail) {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
@@ -17,6 +21,40 @@ const Connection = () => {
         setEmailError("You have entered an invalid email address!")
         return (false)
     }
+
+    let fetchUerToken = useCallback(async (e) => {
+        let str=""+localStorage.getItem('jwt')
+        let response =null;
+
+            response=await fetch(
+                "http://localhost:3004/connection/user",
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        jwt:str
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                })
+
+
+        await response?.json().then(data => {
+
+            if (!isNaN(data?.id)) {
+                localStorage.setItem("utilisateur", data?.id);
+                setMessageLog("Code Bon");
+                setProbleme('connecte')
+            } else {
+                setMessageLog("Deconnecter")
+
+            }
+
+        })
+    });
+
+
+
 
     let fetchConnection = useCallback(async (e) => {
         e.preventDefault();
@@ -44,6 +82,7 @@ const Connection = () => {
             if (!isNaN(data?.id)) {
                 localStorage.setItem("utilisateur", data?.id);
                 setMessageLog("Code Bon");
+                localStorage.setItem('jwt', data?.jwt);
                 setProbleme('connecte')
             } else {
                 setMessageLog("Combinaison code et mot de passe incorrect")
@@ -60,7 +99,9 @@ const Connection = () => {
             {(probleme !== "connecte") ? (
                 <>
                     <div>
+
                         <Navigation></Navigation>
+                        {""+probleme}
                         <div>{messageLog}</div>
                         <div id="iconLogin"/>
                         <input id='email' value={email} placeholder={'email'} onChange={e => {

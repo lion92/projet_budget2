@@ -88,6 +88,8 @@ export function Budget(props) {
 
             fetchAPICat2();
         };
+
+
         ////////////////////////////////////////////
         ///////////////////fectchApi/////////////////////////
         const fetchAPI = useCallback(async () => {
