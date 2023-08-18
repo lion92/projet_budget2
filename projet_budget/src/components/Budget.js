@@ -279,14 +279,20 @@ export function Budget(props) {
                             <input value={montant} onChange={(e) => setMontant(e.target.value)}/>{" "}
                             <p className="error">{montantError}</p>
                         </div>
+                        <div>
+                            <button onClick={fetchCreer}>creer</button>
+                            <button onClick={modifier}>modifier</button>
+                        </div>
+                        <div>
+                            <button onClick={deleteMontant}>Supprimer</button>
+                            <button onClick={recherche}>Rechercher</button>
+                        </div>
+                        <div>
+                            <button onClick={getData}>Download</button>
+                        </div>
+
                     </div>
-                    <button onClick={modifier}>modifier</button>
-                    <button onClick={fetchCreer}>creer</button>
-                    <button onClick={deleteMontant}>Supprimer</button>
-                    <button onClick={recherche}>Rechercher</button>
-                    <div>
-                        <button onClick={getData}>Download</button>
-                    </div>
+
 
                 </form>
                 <div className="container">

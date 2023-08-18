@@ -211,7 +211,7 @@ export default function Form(props) {
             {!load ? <div>
 
 
-                    <div className="containerGraph">
+                    <div className="container">
                         {textp.map((item, index) => {
                             return (
                                 <Item

@@ -189,7 +189,7 @@ export function Categorie(props) {
                             <button onClick={deleteMontant}>Supprimer</button>
                         </div>
 
-                        <div className="containerGraph">
+                        <div className="container">
 
                             {categorieCard.map((item, index) => {
                                 return (<div  className="container" style={{backgroundColor:item.color}}>
