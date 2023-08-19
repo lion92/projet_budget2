@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import Navigation from "./Navigation";
-
+import lien from './lien'
 const Inscription = () => {
     const [email, setEmail] = useState("");
     const [inscriptionError, setInscriptionError] = useState("");
@@ -48,7 +48,7 @@ const Inscription = () => {
         }
 
         const response = await fetch(
-            "http://localhost:3004/connection/signup",
+            lien.url+"connection/signup",
             {
                 method: "POST",
                 body: JSON.stringify(

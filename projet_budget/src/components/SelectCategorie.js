@@ -1,6 +1,5 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {Categorie} from "./Categorie";
-
+import lien from './lien'
 export default function SelectCategorie(props) {
     let [valueOption, setValueOption] = useState("");
     let [textp, setText] = useState([]);
@@ -12,7 +11,7 @@ export default function SelectCategorie(props) {
 
     const fetchAPI = useCallback(async () => {
         let idUser=parseInt("" + localStorage.getItem("utilisateur"))
-        const response = await fetch("http://localhost:3004/categorie/byuser/"+idUser);
+        const response = await fetch(lien.url+"categorie/byuser/"+idUser);
         const resbis = await response.json();
         await setText(resbis);
 

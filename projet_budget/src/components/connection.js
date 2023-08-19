@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import Navigation from "./Navigation";
 import Form from "./Form";
+import lien from './lien'
 
 const Connection = () => {
     const [messageLog, setMessageLog] = useState("");
@@ -27,7 +28,7 @@ const Connection = () => {
         let response =null;
 
             response=await fetch(
-                "http://localhost:3004/connection/user",
+                lien.url+"connection/user",
                 {
                     method: "POST",
                     body: JSON.stringify({
@@ -63,7 +64,7 @@ const Connection = () => {
             setPasswordError("impossible mot de passe trop court minimum 3 caractere")
         } else {
              response=await fetch(
-                "http://localhost:3004/connection/login",
+                lien.url+"connection/login",
                 {
                     method: "POST",
                     body: JSON.stringify({

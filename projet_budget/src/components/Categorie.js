@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import Navigation from "./Navigation";
 import Item from "./Item";
-
+import lien from './lien'
 
 export function Categorie(props) {
 
@@ -61,7 +61,7 @@ export function Categorie(props) {
         let fetchdelete = useCallback(async (data) => {
             let idTodo = parseInt(data, 10)
             const response = await fetch(
-                "http://localhost:3004/categorie/" + idTodo,
+                lien.url+"categorie/" + idTodo,
                 {
                     method: "DELETE",
                     headers: {
@@ -75,7 +75,7 @@ export function Categorie(props) {
         });
         const fetchAPI = useCallback(async () => {
             let idUser=parseInt("" + localStorage.getItem("utilisateur"))
-            const response = await fetch("http://localhost:3004/categorie/byuser/"+idUser);
+            const response = await fetch(lien.url+"categorie/byuser/"+idUser);
             const resbis = await response.json();
             await setCategorieCard(resbis);
 
@@ -85,7 +85,7 @@ export function Categorie(props) {
         let fetchCreer = useCallback(async (e) => {
             e.preventDefault();
             const response = await fetch(
-                "http://localhost:3004/categorie",
+                lien.url+"categorie",
                 {
                     method: "POST",
                     body: JSON.stringify({
@@ -104,7 +104,7 @@ export function Categorie(props) {
         ////////////////////update////////////
         let fetchAPIupdate = useCallback(async () => {
             const response = await fetch(
-                "http://localhost:3004/categorie/" + idVal,
+                lien.url+"categorie/" + idVal,
                 {
                     method: "PUT",
                     body: JSON.stringify({

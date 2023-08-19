@@ -1,9 +1,7 @@
 import React, {useCallback, useEffect, useState} from "react";
 import Item from "./Item";
 import Navigation from "./Navigation";
-import Budget from "./Budget";
-import Graph from "./Graph";
-import {Categorie} from "./Categorie";
+import lien from './lien'
 
 export default function Form(props) {
     let [valueInput, setValue] = useState("");
@@ -50,7 +48,7 @@ export default function Form(props) {
     ///////////////////fectchApi/////////////////////////
     const fetchAPI = useCallback(async () => {
         let idUser=parseInt("" + localStorage.getItem("utilisateur"))
-        const response = await fetch("http://localhost:3004/todos/byuser/"+idUser);
+        const response = await fetch(lien.url+"todos/byuser/"+idUser);
         const resbis = await response.json();
         await setText(resbis);
         return resbis;
@@ -83,7 +81,7 @@ export default function Form(props) {
     let fetchdelete = useCallback(async (data) => {
         let idTodo = parseInt(data, 10)
         const response = await fetch(
-            "http://localhost:3004/todos/" + idTodo,
+            lien.url+"todos/" + idTodo,
             {
                 method: "DELETE",
                 headers: {
@@ -101,7 +99,7 @@ export default function Form(props) {
         let userid2 = parseInt(userid)
         e.preventDefault();
         const response = await fetch(
-            "http://localhost:3004/todos",
+            lien.url+"todos",
             {
                 method: "POST",
                 body: JSON.stringify({
@@ -124,7 +122,7 @@ export default function Form(props) {
         await console.log(userid);
         let id = parseInt(userid);
         const response = await fetch(
-            "http://localhost:3004/todos/" + idVal,
+            lien.url+"todos/" + idVal,
             {
                 method: "PUT",
                 body: JSON.stringify({

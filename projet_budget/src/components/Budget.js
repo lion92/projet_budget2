@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import Graph from "./Graph";
 import Navigation from "./Navigation";
-
+import  lien from './lien'
 
 export function Budget(props) {
 
@@ -36,7 +36,7 @@ export function Budget(props) {
         };
         const fetchAPICat2 = useCallback(async () => {
             let idUser=parseInt("" + localStorage.getItem("utilisateur"))
-            const response = await fetch("http://localhost:3004/action/categorie/sum/byUser/"+idUser);
+            const response = await fetch(lien.url+"action/categorie/sum/byUser/"+idUser);
             const resbis = await response.json();
             await setTextCat2(resbis);
 
@@ -45,7 +45,7 @@ export function Budget(props) {
 
         const fetchAPICat = useCallback(async () => {
             let idUser=parseInt("" + localStorage.getItem("utilisateur"))
-            const response = await fetch("http://localhost:3004/categorie/byuser/"+idUser);
+            const response = await fetch(lien.url+"categorie/byuser/"+idUser);
             const resbis = await response.json();
             await setTextCat(resbis);
 
@@ -94,7 +94,7 @@ export function Budget(props) {
         ///////////////////fectchApi/////////////////////////
         const fetchAPI = useCallback(async () => {
             let idUser=parseInt("" + localStorage.getItem("utilisateur"))
-            const response = await fetch("http://localhost:3004/action/byuser/"+idUser);
+            const response = await fetch(lien.url+"action/byuser/"+idUser);
             const resbis = await response.json();
             await setText(resbis);
             setMontantTotal(resbis.map(val => val.montant).reduce(function (a, b) {
@@ -107,7 +107,7 @@ export function Budget(props) {
         const getData = async (e) => {
             e.preventDefault();
             let idUser=parseInt("" + localStorage.getItem("utilisateur"));
-            fetch("http://localhost:3004/action/export/"+idUser)
+            fetch(lien.url+"action/export/"+idUser)
                 .then( res => res.blob() )
                 .then( blob => {
                     var file = window.URL.createObjectURL(blob);
@@ -143,7 +143,7 @@ export function Budget(props) {
         let fetchdelete = useCallback(async (data) => {
             let idTodo = parseInt(data, 10)
             const response = await fetch(
-                "http://localhost:3004/action/" + idTodo,
+                lien.url+"action/" + idTodo,
                 {
                     method: "DELETE",
                     headers: {
@@ -161,7 +161,7 @@ export function Budget(props) {
 
             e.preventDefault();
             const response = await fetch(
-                "http://localhost:3004/action",
+                lien.url+"action",
                 {
                     method: "POST",
                     body: JSON.stringify({
@@ -183,7 +183,7 @@ export function Budget(props) {
         ////////////////////update////////////
         let fetchAPIupdate = useCallback(async () => {
             const response = await fetch(
-                "http://localhost:3004/action/" + idMontant,
+                lien.url+"action/" + idMontant,
                 {
                     method: "PUT",
                     body: JSON.stringify({
