@@ -1,26 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap');
 @import "https://unpkg.com/water.css@2/out/water.min.css";
-
-body {
-    font-size: 1em;
-}
-
-section {
-    display: flex;
-}
-.container{
-    display: flex;
-    justify-content: center;
-    margin: 10px;
-    border-radius: 10px;
-    padding: 1em;
-    flex-wrap: wrap;
-}
-
 :root {
-    --links: #ddc4c4;
-    --background-body: #343137;
+    --links: #be92e2;
 }
+body{
+    /* The image used */
+    background: #030c2d;
+    /* Full height */
+    height: 100%;
+}
+
 
 .containerTitle {
     display: flex;
@@ -28,42 +17,41 @@ section {
     justify-content: center;
     align-items: center;
     justify-content: space-between;
-    background-color: #262644;
-    border-radius: 999px;
-    text-decoration: none;;
-}
+    background: #0c0d0c;
+    border-radius: 10px;
+    text-decoration: none;
+    opacity: 0.7;
+    font-size: 1em;
 
+}
+.but1{ background-color: #3a3f3a;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;}
+.but1:hover{
+    background-color: #cca058;
+}
 a {
     padding: 0.2em;
     font-weight: bold;
     font-size: 1.5em;
     height: 50px;
+    color: #dbdeec;
 }
 
 a:hover {
-    color: #171519;
+    color: #e4ddea;
     font-size: 28px;
 }
 button{
-    margin-top: 0.2em;
-    position: relative;
-    height: 50px;
-    width: 10em;
-    font-size: 23px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    border-radius: 5px;
-    text-transform: uppercase;
-    border: 1px solid transparent;
-    outline: none;
-    cursor: pointer;
-    background: #0d0d0d;
-    overflow: hidden;
-    transition: 0.6s;
-}
-button{
-    color: #d9d2c7;
-    border-color: #206592;
+    color: #cca058;
+    border-color: #3a3f42;
 }
 
 button:before, button:after{
@@ -76,69 +64,13 @@ button:before, button:after{
     opacity: 0.4;
     transition: 0.6s;
 }
-button:before{
-    width: 60px;
-    background: rgba(255,255,255,0.6);
-    transform: translateX(-130px) skewX(-45deg);
+p, h1, span, label{
+    font-size: 2em;
+    padding: 0;
+    margin: 0;
+    color: #e8e1ef;
+    font-weight: bold;
 }
-button:after{
-    width: 30px;
-    background: rgba(255,255,255,0.6);
-    transform: translateX(-130px) skewX(-45deg);
-}
-button:hover:before,
-button:hover:after{
-    opacity: 0.6;
-    transform: translateX(320px) skewX(-45deg);
-}
-button:hover{
-    color: #f2f2f2;
-}
-
-
-
-input{background-image: none;
-    height: 30px;
-    border: 0;
-    color: inherit;
-    font: inherit;
-    transition: background-color 0.3s;}
-.card {
-    padding: 2em;
-    height: 15em;
-    width: 15em;
-    margin-top: 4em;;
-    background-color: #17141d;
-    border-radius: 10px;
-    box-shadow: -1rem 0 3rem #000;
-    /*   margin-left: -50px; */
-    transition: 0.4s ease-out;
-    position: relative;
-    left: 0px;
-}
-
-.card:not(:first-child) {
-    margin-left: -50px;
-}
-
-.card:hover {
-    transform: translateY(-20px);
-    transition: 0.4s ease-out;
-}
-
-.card:hover ~ .card {
-    position: relative;
-    left: 50px;
-    transition: 0.4s ease-out;
-}
-
-.card button{
-    width: 6em;
-    padding: 0.1em;
-    border: none;
-}
-.card p, .card h1{
-    text-align: center;
-    font-size: 28px;
-
+a{
+    font-size: 1em;
 }

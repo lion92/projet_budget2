@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import Graph from "./Graph";
 import Navigation from "./Navigation";
 import  lien from './lien'
+import Calendar from 'react-calendar';
 
 export function Budget(props) {
 
@@ -22,6 +23,9 @@ export function Budget(props) {
         let [montantTotal, setMontantTotal] = useState(0);
         let [textCat2, setTextCat2] = useState([]);
         const [load, setLoad] = useState(false);
+        const [datePick, onChangeDatePick] = useState(new Date());
+
+
         const data = {
             labels: textCat2.map(value => value.categorie),
             datasets: [
@@ -168,7 +172,8 @@ export function Budget(props) {
                         montant: montant,
                         categorie: actionCategorie,
                         description: actionDescription,
-                        user: parseInt("" + localStorage.getItem("utilisateur"))
+                        user: parseInt("" + localStorage.getItem("utilisateur")),
+                        dateTransaction: datePick.toISOString()
                     }),
                     headers: {
                         "Content-Type": "application/json",
@@ -190,7 +195,8 @@ export function Budget(props) {
                         categorie: actionCategorie,
                         description: actionDescription,
                         montant: montant,
-                        user: parseInt("" + localStorage.getItem("utilisateur"))
+                        user: parseInt("" + localStorage.getItem("utilisateur")),
+                        dateTransaction: datePick.toISOString()
                     }),
                     headers: {
                         "Content-Type": "application/json",
@@ -235,6 +241,10 @@ export function Budget(props) {
             setValue("");
 
         };
+        function setIdCat(option){
+            setActionCategorie(option.id);
+
+        };
         /////////////////////////modifier
         let deleteMontant = (e) => {
             e.preventDefault();
@@ -257,17 +267,19 @@ export function Budget(props) {
                             <label>IdMontant</label>
                             <input value={idMontant} onChange={(e) => setIdMontant(e.target.value)}/>{" "}
                         </div>
+                            <p>Id={actionCategorie}</p>
                             <label>Categorie</label>
-                            <select>
+                            <div>
                                 {textCat.map((option, index) => {
-                                    return <option onClick={() => {
-                                        setActionCategorie(option.id)
-                                    }} key={option.id}>
-                                        {option.id +" "+option.categorie}
+                                    return <h1 className="but1" onClick={()=>{setIdCat( option)}}
+                                   key={option.id}>
+                                        {option.id+" "+option.categorie}
 
-                                    </option>
+
+
+                                    </h1>
                                 })}
-                            </select>
+                            </div>
                             <p className="error">{actionCategorieError}</p>
                         </div>
                         <div>
@@ -282,6 +294,11 @@ export function Budget(props) {
                             <p className="error">{montantError}</p>
                         </div>
                         <div>
+                            <div>
+                                <div>{datePick.toLocaleDateString()}</div>
+                                <div>{datePick.toDateString()}</div>
+                                <Calendar onChange={onChangeDatePick} value={datePick} />
+                            </div>
                             <button onClick={fetchCreer}>creer</button>
                             <button onClick={modifier}>modifier</button>
                         </div>
@@ -307,7 +324,8 @@ export function Budget(props) {
                             <th>Description</th>
                             <th>Categorie Id</th>
                             <th>Categorie</th>
-                            <th>Date d'ajout de la dépense</th>
+                            <th>Date de la dépense</th>
+                            <th>Date d'ajout</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -325,6 +343,7 @@ export function Budget(props) {
                                         <th className="description">{item.description}</th>
                                         <th className="description">{item.categorieId}</th>
                                         <th className="description">{item.categorie}</th>
+                                        <th className="description">{item.dateTransaction}</th>
                                         <th className="description">{item.dateAjout}</th>
 
                                     </tr>

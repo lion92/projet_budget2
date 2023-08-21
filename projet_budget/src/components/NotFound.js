@@ -1,9 +1,11 @@
 import React from 'react'
+import Helloword from "./Helloword";
+import Navigation from "./Navigation";
 
 function NotFound() {
     return (
         <div>
-            <h1>Not found</h1>
+            <Navigation></Navigation>
         </div>
     )
 }

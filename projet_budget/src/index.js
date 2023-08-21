@@ -12,8 +12,6 @@ import {Categorie} from "./components/Categorie";
 
 
 const Root=()=>(
-
-
     <Router>
         <Switch>
             <Route exact path="/" component={Navigation}/>
