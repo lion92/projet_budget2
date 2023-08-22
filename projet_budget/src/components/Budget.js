@@ -1,8 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import Graph from "./Graph";
 import Navigation from "./Navigation";
-import  lien from './lien'
+import lien from './lien'
 import Calendar from 'react-calendar';
+import GraphParDate from "./GraphParDate";
 
 export function Budget(props) {
 
@@ -30,17 +31,51 @@ export function Budget(props) {
             labels: textCat2.map(value => value.categorie),
             datasets: [
                 {
-                    label: 'Graphique',
+                    label: 'Montant par catégorie',
                     data: textCat2.map(value => value.montant),
-                    backgroundColor: textCat2.map(value =>value.color),
+                    backgroundColor: textCat2.map(value => value.color),
                     borderColor: 'black',
 
                 }
             ]
         };
+        const dataParDate = {
+            type: 'line',
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        // Luxon format string
+                        tooltipFormat: 'DD T'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'value'
+                    }
+                }
+            },
+            labels: textp.map(value => value.description+""+value.dateTransaction),
+            datasets: [{
+                label: "Depense par date",
+                backgroundColor: 'pink',
+                borderColor: 'red',
+                fill: false,
+                data: textp.map(value => {
+                    return {x: value.dateTransaction, y: value?.montant}
+                }),
+            }]
+        };
+
+
         const fetchAPICat2 = useCallback(async () => {
-            let idUser=parseInt("" + localStorage.getItem("utilisateur"))
-            const response = await fetch(lien.url+"action/categorie/sum/byUser/"+idUser);
+            let idUser = parseInt("" + localStorage.getItem("utilisateur"))
+            const response = await fetch(lien.url + "action/categorie/sum/byUser/" + idUser);
             const resbis = await response.json();
             await setTextCat2(resbis);
 
@@ -48,8 +83,8 @@ export function Budget(props) {
         }, [setTextCat2]);
 
         const fetchAPICat = useCallback(async () => {
-            let idUser=parseInt("" + localStorage.getItem("utilisateur"))
-            const response = await fetch(lien.url+"categorie/byuser/"+idUser);
+            let idUser = parseInt("" + localStorage.getItem("utilisateur"))
+            const response = await fetch(lien.url + "categorie/byuser/" + idUser);
             const resbis = await response.json();
             await setTextCat(resbis);
 
@@ -97,8 +132,8 @@ export function Budget(props) {
         ////////////////////////////////////////////
         ///////////////////fectchApi/////////////////////////
         const fetchAPI = useCallback(async () => {
-            let idUser=parseInt("" + localStorage.getItem("utilisateur"))
-            const response = await fetch(lien.url+"action/byuser/"+idUser);
+            let idUser = parseInt("" + localStorage.getItem("utilisateur"))
+            const response = await fetch(lien.url + "action/byuser/" + idUser);
             const resbis = await response.json();
             await setText(resbis);
             setMontantTotal(resbis.map(val => val.montant).reduce(function (a, b) {
@@ -110,10 +145,10 @@ export function Budget(props) {
 
         const getData = async (e) => {
             e.preventDefault();
-            let idUser=parseInt("" + localStorage.getItem("utilisateur"));
-            fetch(lien.url+"action/export/"+idUser)
-                .then( res => res.blob() )
-                .then( blob => {
+            let idUser = parseInt("" + localStorage.getItem("utilisateur"));
+            fetch(lien.url + "action/export/" + idUser)
+                .then(res => res.blob())
+                .then(blob => {
                     var file = window.URL.createObjectURL(blob);
                     window.location.assign(file);
                 });
@@ -147,7 +182,7 @@ export function Budget(props) {
         let fetchdelete = useCallback(async (data) => {
             let idTodo = parseInt(data, 10)
             const response = await fetch(
-                lien.url+"action/" + idTodo,
+                lien.url + "action/" + idTodo,
                 {
                     method: "DELETE",
                     headers: {
@@ -165,7 +200,7 @@ export function Budget(props) {
 
             e.preventDefault();
             const response = await fetch(
-                lien.url+"action",
+                lien.url + "action",
                 {
                     method: "POST",
                     body: JSON.stringify({
@@ -188,7 +223,7 @@ export function Budget(props) {
         ////////////////////update////////////
         let fetchAPIupdate = useCallback(async () => {
             const response = await fetch(
-                lien.url+"action/" + idMontant,
+                lien.url + "action/" + idMontant,
                 {
                     method: "PUT",
                     body: JSON.stringify({
@@ -241,7 +276,8 @@ export function Budget(props) {
             setValue("");
 
         };
-        function setIdCat(option){
+
+        function setIdCat(option) {
             setActionCategorie(option.id);
 
         };
@@ -263,18 +299,19 @@ export function Budget(props) {
                     <div className="containerGraph">
 
                         <div className="containerGraph">
-                            <div>
-                            <label>IdMontant</label>
-                            <input value={idMontant} onChange={(e) => setIdMontant(e.target.value)}/>{" "}
-                        </div>
+                            <div className="cache">
+                                <label>IdMontant</label>
+                                <input value={idMontant} onChange={(e) => setIdMontant(e.target.value)}/>{" "}
+                            </div>
                             <p>Id={actionCategorie}</p>
                             <label>Categorie</label>
                             <div>
                                 {textCat.map((option, index) => {
-                                    return <h1 className="but1" onClick={()=>{setIdCat( option)}}
-                                   key={option.id}>
-                                        {option.id+" "+option.categorie}
-
+                                    return <h1 className="but1" onClick={() => {
+                                        setIdCat(option)
+                                    }}
+                                               key={option.id}>
+                                        {option.id + " " + option.categorie}
 
 
                                     </h1>
@@ -297,7 +334,7 @@ export function Budget(props) {
                             <div>
                                 <div>{datePick.toLocaleDateString()}</div>
                                 <div>{datePick.toDateString()}</div>
-                                <Calendar onChange={onChangeDatePick} value={datePick} />
+                                <Calendar onChange={onChangeDatePick} value={datePick}/>
                             </div>
                             <button onClick={fetchCreer}>creer</button>
                             <button onClick={modifier}>modifier</button>
@@ -359,8 +396,9 @@ export function Budget(props) {
                         </tfoot>
                     </table>
 
-                </div><Graph data={data}></Graph>
-
+                </div>
+                <Graph data={data}></Graph>
+                <GraphParDate data={dataParDate}></GraphParDate>
             </div>
         );
     }

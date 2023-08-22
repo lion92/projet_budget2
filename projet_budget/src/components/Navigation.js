@@ -4,7 +4,9 @@ import Helloword from "./Helloword";
 
 const Navigation = () => {
     return (
-        <div>
+        <>
+        <Helloword></Helloword>
+        <nav className="menu">
             <ul className='containerTitle' >
                 <NavLink to={"/"}>
                     <li>Bienvenue</li>
@@ -27,8 +29,9 @@ const Navigation = () => {
 
 
             </ul>
-            <Helloword></Helloword>
-        </div>
+
+        </nav>
+        </>
     );
 };
 
