@@ -4,7 +4,7 @@ import Navigation from "./Navigation";
 import lien from './lien'
 import Calendar from 'react-calendar';
 import GraphParDate from "./GraphParDate";
-
+import ProgressBar from "@ramonak/react-progress-bar";
 export function Budget(props) {
 
 
@@ -25,6 +25,7 @@ export function Budget(props) {
         let [textCat2, setTextCat2] = useState([]);
         const [load, setLoad] = useState(false);
         const [datePick, onChangeDatePick] = useState(new Date());
+        const [budget, setBudget] = useState(0);
 
 
         const data = {
@@ -276,7 +277,21 @@ export function Budget(props) {
             setValue("");
 
         };
+        let calcul = () => {
+            if(montantTotal!==0){
+                if(budget!==0){
+                    return ((montantTotal*100)/budget)*100                }
+                else
+                {
+                    return 1
+                }
+            }
+            else
+            {
+                return 0;
+            }
 
+        };
         function setIdCat(option) {
             setActionCategorie(option.id);
 
@@ -293,6 +308,15 @@ export function Budget(props) {
             <div>
                 <Navigation></Navigation>
 
+                <div>
+                    <label>Budget à définir</label>
+                    <input value={budget} onChange={(e) => setBudget(e.target.value)}/>{" "}
+                </div>
+                {
+                   "Ecrire le montant de votre budget et le calcul affichera le pourcentage des dépenses en fonction de votre budget"
+                }
+                <ProgressBar completed={calcul()/100}
+                 />
                 <form>
                     <label id="idLabel">
                         id:{idMontant} </label>

@@ -125,7 +125,7 @@ const Connection = () => {
                                }} type={'text'}/>
 
                         <p className="error">{passwordError}</p>
-                        <a id="mdpOublie" href="">Mot de passe ounblié</a>
+                        <a id="mdpOublie" href="">Mot de passe oublié</a>
                         <button onClick={fetchConnection} id='btnLogin'>LOGIN</button>
                         <h1>{(probleme !== 'connecte' ? 'incorrect' : 'connecte')}</h1>
                     </div>

@@ -160,7 +160,7 @@ nav.menu {
     transition-duration: 0.9s;
 
 }
-#.menutoggle i {
+.menutoggle i {
     color: #fff;
     font-size: 33px;
     margin: 0;
@@ -244,4 +244,22 @@ nav.menu {
 }
 .cache{
     display: none;
+}
+
+.wrapper {
+    border: 3px solid blue;
+}
+
+.container {
+    background-color: #e02042;
+}
+
+.barCompleted {
+    background-color: #66acc2;
+    width: 80%;
+}
+
+.label {
+    font-size: 20px;
+    color: green;
 }

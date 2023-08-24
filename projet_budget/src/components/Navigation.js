@@ -31,6 +31,7 @@ const Navigation = () => {
             </ul>
 
         </nav>
+            <p>Bienvenue</p>
         </>
     );
 };
